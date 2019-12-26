@@ -14,6 +14,7 @@
 Route::get('/','LandingPageController');
 
 /*------------------Custom auth------------------------*/
+Route::get('/test','CustomAuth\LoginController@forTest');
 Route::get('/login','CustomAuth\LoginController@login')->name('login');
 Route::post('/login','CustomAuth\LoginController@authenticate')->name('login.authenticate');
 /*------------------End Of Custom auth------------------------*/
