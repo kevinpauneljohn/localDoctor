@@ -36,7 +36,7 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">{{ __('adminlte::adminlte.login_message') }}</p>
-                @if(session('success') === false && session('message') === "Invalid Credential")
+                @if(session('success') === false)
                     <div class="alert alert-danger">
                         <i class="fa fa-times-circle"></i> {{session('message')}}
                     </div>

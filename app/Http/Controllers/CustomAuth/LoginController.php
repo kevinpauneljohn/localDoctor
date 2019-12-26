@@ -25,21 +25,19 @@ class LoginController extends Controller
 
     public function forTest()
     {
-        $client = new Client([
-            'headers' => ['content-type' => 'application/json', 'Accept' => 'application/json'],
-        ]);
-
-        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/login',[
-            'json' => [
-                'username' => 'admin',
-                'password' => '123',
-            ],
-        ]);
-
-        $data = $response->getBody();
-        $data = json_decode($data);
-
-
+//        $client = new Client([
+//            'headers' => ['content-type' => 'application/json', 'Accept' => 'application/json'],
+//        ]);
+//
+//        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/login',[
+//            'json' => [
+//                'username' => 'admin',
+//                'password' => '123',
+//            ],
+//        ]);
+//
+//        $data = $response->getBody();
+//        $data = json_decode($data);
 
     }
     /**
@@ -106,42 +104,54 @@ class LoginController extends Controller
         if less than 1 meaning the Users table is empty*/
         if($this->checkUsers() < 1)
         {
-            //get the user data from server
-            $datas = $this->authenticate_credential($request->username, $request->password);
-
-            if($datas->success === true)
+            //this will check if there is internet connectivity
+            if(!$sock = @fsockopen('doctorapp.devouterbox.com', 80))
             {
-                $array = array();
-                foreach ($datas->user as $key => $data){
-                    $array = [
-                        'id'    => $data->id,
-                        'firstname'    => $data->firstname,
-                        'middlename'    => $data->middlename,
-                        'lastname'    => $data->lastname,
-                        'username'    => $data->username,
-                        'email'    => $data->email,
-                        'email_verified_at'    => $data->email_verified_at,
-                        'password'    => $data->password,
-                        'mobileNo'    => $data->mobileNo,
-                        'landline'    => $data->landline,
-                        'birthday'    => $data->birthday,
-                        'address'    => $data->address,
-                        'refregion'    => $data->refregion,
-                        'refprovince'    => $data->refprovince,
-                        'refcitymun'    => $data->refcitymun,
-                        'postalcode'    => $data->postalcode,
-                        'status'    => $data->status,
-                        'created_at'    => $data->created_at,
-                        'updated_at'    => $data->updated_at,
-                        'deleted_at'    => $data->deleted_at,
-                        'category'    => $data->category,
-                        'owner'    => $data->owner,
-                    ];
-                }
-                //credential validation returns true
-                //save the owners data to local database
-                DB::table('users')->insert($array);
+                return back()->with(['success' => false, 'message' => 'No Internet Connection '])->withInput();
             }
+            else
+            {
+                //get the user data from server
+                $datas = $this->authenticate_credential($request->username, $request->password);
+
+                if($datas->success === true)
+                {
+                    $array = array();
+                    foreach ($datas->user as $key => $data){
+                        $array = [
+                            'id'    => $data->id,
+                            'firstname'    => $data->firstname,
+                            'middlename'    => $data->middlename,
+                            'lastname'    => $data->lastname,
+                            'username'    => $data->username,
+                            'email'    => $data->email,
+                            'email_verified_at'    => $data->email_verified_at,
+                            'password'    => $data->password,
+                            'mobileNo'    => $data->mobileNo,
+                            'landline'    => $data->landline,
+                            'birthday'    => $data->birthday,
+                            'address'    => $data->address,
+                            'refregion'    => $data->refregion,
+                            'refprovince'    => $data->refprovince,
+                            'refcitymun'    => $data->refcitymun,
+                            'postalcode'    => $data->postalcode,
+                            'status'    => $data->status,
+                            'created_at'    => $data->created_at,
+                            'updated_at'    => $data->updated_at,
+                            'deleted_at'    => $data->deleted_at,
+                            'category'    => $data->category,
+                            'owner'    => $data->owner,
+                        ];
+                    }
+                    //credential validation returns true
+                    //save the owners data to local database
+                    DB::table('users')->insert($array);
+                    $user = User::find($array['id']);
+                    //after user data was saved from the local database it will set the user role
+                    $user->assignRole($datas->roles);
+                }
+            }
+
         }
 
         $credential = $request->only('username','password');
