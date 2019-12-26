@@ -16,4 +16,17 @@ class DashboardController extends Controller
     {
         return view('pages.dashboard');
     }
+
+    public function is_connected()
+    {
+        if(!$sock = @fsockopen('doctorapp.devouterbox.com', 80))
+        {
+            echo 'Not Connected';
+        }
+        else
+        {
+            echo 'Connected';
+        }
+
+    }
 }
