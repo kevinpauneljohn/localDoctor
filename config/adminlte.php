@@ -203,34 +203,28 @@ return [
             'can'     => 'view user',
             'submenu' => [
                 [
-                    'text' => 'Backend User',
+                    'text' => 'Medical Staffs',
                     'icon_color' => 'blue',
-                    'url'  => '#',
+                    'route'  => 'medicalStaffs.index',
+                    'can'  => 'view medical staff'
                 ],
                 [
-                    'text' => 'Client',
+                    'text' => 'Employees',
                     'icon_color' => 'red',
                     'url'  => '/clients',
-                    'can'  => 'view client'
-                ],
-            ],
-        ],
-        [
-            'text'    => 'Roles And Permission',
-            'icon'    => 'fa fa-fw fa-id-badge',
-            'can'  => 'view role',
-            'submenu' => [
-                [
-                    'text' => 'Roles',
-                    'icon_color' => 'blue',
-                    'can' => 'view role',
-                    'url'  => '/roles',
+                    'can'  => 'view user'
                 ],
                 [
-                    'text' => 'Permission',
+                    'text' => 'Positions',
                     'icon_color' => 'red',
-                    'can'   => 'view permission',
-                    'url'  => '/permissions',
+                    'url'  => '/clients',
+                    'can'  => 'view user'
+                ],
+                [
+                    'text' => 'Specialization',
+                    'icon_color' => 'red',
+                    'url'  => '/clients',
+                    'can'  => 'view user'
                 ],
             ],
         ],
