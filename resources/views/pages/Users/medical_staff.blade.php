@@ -101,10 +101,25 @@
                                 <input type="text" name="mobileNo" class="form-control" id="mobileNo">
                             </div>
                             <div class="form-group address">
-                                <label for="address">Complete Address</label><span class="required">*</span>
-                                <textarea name="address" class="form-control" id="address">
+                                <label for="address">Street/House/Bldg. Address</label><span class="required">*</span>
+                                <input type="text" name="address" class="form-control" id="address">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 province">
+                                    <label for="province">Province</label><span class="required">*</span>
+                                    <select class="form-control" name="province" id="province">
+                                        <option value="">-- Select Province</option>
+                                            @foreach($provinces as $province)
+                                                <option value="{{$province->provCode}}">{{$province->provDesc}}</option>
+                                            @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 city">
+                                    <label for="city">City</label><span class="required">*</span>
+                                    <select class="form-control" name="city" id="city">
 
-                                </textarea>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
@@ -217,6 +232,29 @@
 
             /*select2 initialize*/
             $('.select2').select2();
+
+            /*fetch city*/
+            $(document).ready(function(){
+                let province = $('#medical-staff-form #province');
+                let city = $('#medical-staff-form #city');
+
+                province.change(function () {
+                    city.html("");
+                    $.ajax({
+                        'url' : '/address/city/'+province.val(),
+                        'type' : 'GET',
+                        success: function(result){
+                            city.append('<option value="">Select State</option>');
+                            $.each(result, function ( key , value ) {
+                                console.log(value.citymunDesc)
+                                city.append('<option value="'+value.citymunCode+'">'+value.citymunDesc+'</option>');
+                            });
+                        },error(xhr, status, error){
+                            console.log("error: "+error+" status: "+status+" xhr: "+xhr);
+                        }
+                    });
+                });
+            });
         </script>
     @endcan
 @stop

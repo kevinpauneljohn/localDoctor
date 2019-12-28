@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
 class MedicalStaffController extends Controller
@@ -18,6 +19,8 @@ class MedicalStaffController extends Controller
      */
     public function index()
     {
+        $provinces = DB::table('refprovince')->orderBy('provDesc','asc')->get();
+
         return view('pages.Users.medical_staff')->with([
             'clinics'   => Clinic::all(),
             'positions'  => Role::where([
@@ -25,6 +28,7 @@ class MedicalStaffController extends Controller
                 ['name','!=','medical staff'],
                 ['name','!=','owner'],
             ])->get(),
+            'provinces' => $provinces,
         ]);
     }
 
