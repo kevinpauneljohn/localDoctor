@@ -235,6 +235,7 @@
 
             /*fetch city*/
             $(document).ready(function(){
+                let medicalForm = $('#medical-staff-form');
                 let province = $('#medical-staff-form #province');
                 let city = $('#medical-staff-form #city');
 
@@ -246,13 +247,19 @@
                         success: function(result){
                             city.append('<option value="">Select State</option>');
                             $.each(result, function ( key , value ) {
-                                console.log(value.citymunDesc)
                                 city.append('<option value="'+value.citymunCode+'">'+value.citymunDesc+'</option>');
                             });
                         },error(xhr, status, error){
                             console.log("error: "+error+" status: "+status+" xhr: "+xhr);
                         }
                     });
+                });
+
+
+                medicalForm.submit(function(form){
+                    form.preventDefault();
+                    let value = medicalForm.serialize();
+
                 });
             });
         </script>
