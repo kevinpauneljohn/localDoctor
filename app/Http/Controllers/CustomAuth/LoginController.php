@@ -39,6 +39,30 @@ class LoginController extends Controller
 //        $data = $response->getBody();
 //        $data = json_decode($data);
 
+        $http = new Client();
+
+        $response = $http->post('https://doctorapp.devouterbox.com/oauth/token', [
+            'form_params' => [
+                'grant_type' => 'password',
+                'client_id' => '2',
+                'client_secret' => 'J4ORCAWx6LOJfZq8VGjlU0QAiu7xN0E1ryqdwYzF',
+                'username' => 'john@gmail.com',
+                'password' => '123',
+                'scope' => '',
+            ],
+        ]);
+        $data = json_decode((string) $response->getBody(), true);
+        $accessToken = $data['access_token'];
+
+        $response = $http->request('GET', 'https://doctorapp.devouterbox.com/api/user', [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.$accessToken,
+            ],
+        ]);
+
+        return json_decode((string) $response->getBody(), true);
+
     }
     /**
      * Dec. 27, 2019
