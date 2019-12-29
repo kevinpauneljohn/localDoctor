@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Str;
 
 class MedicalStaffController extends Controller
 {
@@ -29,6 +30,7 @@ class MedicalStaffController extends Controller
                 ['name','!=','owner'],
             ])->get(),
             'provinces' => $provinces,
+            'token' => Str::random(60)
         ]);
     }
 

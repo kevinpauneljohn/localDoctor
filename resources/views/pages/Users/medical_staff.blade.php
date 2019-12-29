@@ -25,6 +25,7 @@
 
         </div>
         <div class="card-body">
+            {{$token}}
             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                 <table id="medical-staff-list" class="table table-bordered table-striped" role="grid">
                     <thead>
