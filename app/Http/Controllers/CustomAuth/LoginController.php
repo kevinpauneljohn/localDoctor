@@ -12,6 +12,7 @@ use Spatie\Activitylog\Models\Activity;
 
 class LoginController extends Controller
 {
+    private $user;
     /**
      * Dec. 26, 2019
      * @author john kevin paunel
@@ -25,20 +26,20 @@ class LoginController extends Controller
 
     public function forTest()
     {
-//        $client = new Client([
-//            'headers' => ['content-type' => 'application/json', 'Accept' => 'application/json'],
-//        ]);
-//
-//        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/login',[
-//            'json' => [
-//                'username' => 'admin',
-//                'password' => '123',
-//            ],
-//        ]);
-//
-//        $data = $response->getBody();
-//        $data = json_decode($data);
+        $client = new Client([
+            'headers' => ['content-type' => 'application/json', 'Accept' => 'application/json'],
+        ]);
 
+        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/login',[
+            'json' => [
+                'username' => 'admin',
+                'password' => '123',
+            ],
+        ]);
+
+        $data = $response->getBody();
+        $data = json_decode($data);
+        return $data->access_token;
     }
     /**
      * Dec. 27, 2019
@@ -146,9 +147,12 @@ class LoginController extends Controller
                     //credential validation returns true
                     //save the owners data to local database
                     DB::table('users')->insert($array);
-                    $user = User::find($array['id']);
+                    $this->user = User::find($array['id']);
                     //after user data was saved from the local database it will set the user role
-                    $user->assignRole($datas->roles);
+                    $this->user->assignRole($datas->roles);
+                    $tokenResult = $this->user->createToken('authToken')->accessToken;
+                    $token = $tokenResult;
+                    $token->save();
                 }
             }
 
@@ -159,9 +163,10 @@ class LoginController extends Controller
         if(Auth::attempt($credential))
         {
             activity()->causedBy(auth()->user()->id)->withProperties(['username' => auth()->user()->username])->log('user logged in');
+
             return redirect(route('dashboard'));
         }
-        return back()->with(['success' => false, 'message' => 'Invalid Credential'])->withInput();
+        return back()->with(['success' => false, 'message' => 'Invalid Credential'],401)->withInput();
     }
 
     /**
