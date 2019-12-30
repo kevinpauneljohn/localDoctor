@@ -25,7 +25,6 @@
 
         </div>
         <div class="card-body">
-            {{$token}}
             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                 <table id="medical-staff-list" class="table table-bordered table-striped" role="grid">
                     <thead>
@@ -246,7 +245,7 @@
                         'url' : '/address/city/'+province.val(),
                         'type' : 'GET',
                         success: function(result){
-                            city.append('<option value="">Select State</option>');
+                            city.append('<option value="">-- Select City --</option>');
                             $.each(result, function ( key , value ) {
                                 city.append('<option value="'+value.citymunCode+'">'+value.citymunDesc+'</option>');
                             });

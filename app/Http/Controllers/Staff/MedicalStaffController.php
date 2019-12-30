@@ -30,7 +30,6 @@ class MedicalStaffController extends Controller
                 ['name','!=','owner'],
             ])->get(),
             'provinces' => $provinces,
-            'token' => Str::random(60)
         ]);
     }
 
