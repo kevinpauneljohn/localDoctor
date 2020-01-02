@@ -87,7 +87,7 @@ class MedicalStaffController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'clinic'    => 'required',
+//            'clinic'    => 'required',
             'position'  => 'required',
             'firstname' => 'required',
             'lastname'  => 'required',
@@ -103,21 +103,22 @@ class MedicalStaffController extends Controller
             $medical_staff->firstname = $request->firstname;
             $medical_staff->middlename = $request->middlename;
             $medical_staff->lastname = $request->lastname;
-            $medical_staff->username = $request->username;
-            $medical_staff->email = $request->email;
-            $medical_staff->password = bcrypt($request->password);
             $medical_staff->mobileNo = $request->mobileNo;
-            $medical_staff->landline = $request->landline;
-            $medical_staff->birthday = $request->birthday;
             $medical_staff->address = $request->address;
-            $medical_staff->refregion = $request->region;
-            $medical_staff->refprovince = $request->state;
+            $medical_staff->refprovince = $request->province;
             $medical_staff->refcitymun = $request->city;
-            $medical_staff->postalcode = $request->postalcode;
             $medical_staff->status = 'offline';
             $medical_staff->category = 'client';
-            $medical_staff->owner = 1;
-            $medical_staff->assignRole(['owner','admin']);
+            $medical_staff->assignRole('medical staff');
+            foreach ($request->position as $role)
+            {
+                $medical_staff->assignRole($role);
+            }
+
+            if($medical_staff->save())
+            {
+                return response()->json(['success' => true]);
+            }
         }
 
         return response()->json($validator->errors());
@@ -166,5 +167,16 @@ class MedicalStaffController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function checkInternetConnection()
+    {
+        $result = 1;
+        if(!$sock = @fsockopen('doctorapp.devouterbox.com', 80))
+        {
+           $result = 0;
+        }
+
+        return $result;
     }
 }

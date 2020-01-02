@@ -24,7 +24,7 @@ $(document).ready(function(){
                 if(result.success === true)
                 {
                     setTimeout(function(){
-                        toastr.success('New Permission Successfully Added!')
+                        toastr.success('New Medical Staff Successfully Added!')
 
                         setTimeout(function(){
                             location.reload();
@@ -45,6 +45,6 @@ $(document).ready(function(){
                 console.log(xhr);
             }
         });
-        clear_errors("clinic","position","firstname","lastname","mobileNo","address","province","city");
+        clear_errors("position","firstname","lastname","mobileNo","address","province","city");
     });
 });
