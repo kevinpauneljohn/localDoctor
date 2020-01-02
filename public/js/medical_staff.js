@@ -22,15 +22,15 @@ $(document).ready(function(){
             success: function(result, status, xhr){
                 console.log(result);
                 if(result.success === true)
-                {
-                    setTimeout(function(){
-                        toastr.success('New Medical Staff Successfully Added!')
-
-                        setTimeout(function(){
-                            location.reload();
-                        },1500);
-                    });
-                }
+                // {
+                //     setTimeout(function(){
+                //         toastr.success('New Medical Staff Successfully Added!')
+                //
+                //         setTimeout(function(){
+                //             location.reload();
+                //         },1500);
+                //     });
+                // }
                 $.each(result, function (key, value) {
                     var element = $('#medical-staff-form #'+key);
 

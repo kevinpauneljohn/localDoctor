@@ -38,8 +38,6 @@ Route::post('/permissions','PermissionController@store')->name('permissions.stor
 Route::put('/permissions/{permission}','PermissionController@update')->name('permissions.update')->middleware(['auth','permission:edit permission']);
 Route::get('/permissions/{permission}','PermissionController@show')->name('permissions.show')->middleware(['auth','permission:assign role to permission']);
 
-
-//Route::get('color/{position}','RolesColorController');
 /*roles*/
 Route::get('/roles','RolesController@index')->name('roles.index')->middleware(['auth','permission:view role']);
 Route::post('/roles','RolesController@store')->name('roles.store')->middleware(['auth','permission:add role']);

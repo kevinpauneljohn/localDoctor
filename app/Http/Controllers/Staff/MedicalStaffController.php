@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Staff;
 
 use App\Clinic;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\RolesColorController;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
+use GuzzleHttp\Client;
 
 class MedicalStaffController extends Controller
 {
@@ -31,7 +31,6 @@ class MedicalStaffController extends Controller
                 ['name','!=','owner'],
             ])->get(),
             'provinces' => $provinces,
-            'color' => new RolesColorController(),
         ]);
     }
 
@@ -101,6 +100,32 @@ class MedicalStaffController extends Controller
 
         if($validator->passes())
         {
+
+            if($this->checkInternetConnection() > 0)
+            {
+                //internet connection ok
+
+                $client = new Client([
+                    'headers' => [
+                        'Accept' => 'application/json',
+                        'Authorization' => 'Bearer '.auth()->user()->api_token,
+                    ],
+                ]);
+
+                $response = $client->request('POST','https://doctorapp.devouterbox.com/api/userClients',[
+                    'json' => [
+                        'position' => $request->position,
+                        'firstname' => $request->firstname,
+                        'lastname' => $request->lastname,
+                        'mobileNo' => $request->mobileNo,
+                        'address' => $request->address,
+                        'province' => $request->province,
+                        'city' => $request->city,
+                    ],
+                ]);
+
+                return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
+            }
             $medical_staff = new User();
             $medical_staff->firstname = $request->firstname;
             $medical_staff->middlename = $request->middlename;
@@ -119,6 +144,10 @@ class MedicalStaffController extends Controller
 
             if($medical_staff->save())
             {
+                $access_token = $medical_staff->createToken('authToken')->accessToken;
+                $userToken  = User::find($medical_staff->id);
+                $userToken->api_token = $access_token;
+                $userToken->save();
                 return response()->json(['success' => true]);
             }
         }
@@ -171,6 +200,12 @@ class MedicalStaffController extends Controller
         //
     }
 
+    /**
+     * Jan. 03, 2020
+     * @author john kevin paunel
+     * check internet connection status
+     * @return mixed
+     * */
     private function checkInternetConnection()
     {
         $result = 1;
@@ -183,6 +218,13 @@ class MedicalStaffController extends Controller
     }
 
 
+    /**
+     * Jan. 03, 2020
+     * @author john kevin paunel
+     * Set the color badge of positions
+     * @param string $role
+     * @return string
+     * */
     private function roleColor($role)
     {
         switch ($role)
