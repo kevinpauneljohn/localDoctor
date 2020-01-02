@@ -76,7 +76,7 @@
 
                             <div class="form-group position">
                                 <label for="position">Position</label><span class="required">*</span>
-                                <select class="form-control select2" name="position" id="position" multiple="multiple" style="width:100%;">
+                                <select class="form-control select2" name="position[]" id="position" multiple="multiple" style="width:100%;">
                                     <option value=""> -- Select Position --</option>
                                     @foreach($positions as $position)
                                         <option value="{{$position->name}}">{{$position->name}}</option>
@@ -213,6 +213,7 @@
     @can('view medical staff')
         <script src="{{asset('vendor/datatables/js/dataTables.bootstrap4.min.js')}}"></script>
         <script src="{{asset('vendor/select2/js/select2.full.min.js')}}"></script>
+        <script src="{{asset('js/medical_staff.js')}}"></script>
         <script>
             $(function() {
                 $('#medical-staff-list').DataTable({

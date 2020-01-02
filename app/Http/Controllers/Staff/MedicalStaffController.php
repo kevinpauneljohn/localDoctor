@@ -8,8 +8,8 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Str;
 
 class MedicalStaffController extends Controller
 {
@@ -86,7 +86,39 @@ class MedicalStaffController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'clinic'    => 'required',
+            'position'  => 'required',
+            'firstname' => 'required',
+            'lastname'  => 'required',
+            'mobileNo'  => 'required',
+            'address'  => 'required',
+            'province'  => 'required',
+            'city'  => 'required',
+        ]);
+
+        if($validator->passes())
+        {
+            $medical_staff = new User();
+            $medical_staff->firstname = $request->firstname;
+            $medical_staff->middlename = $request->middlename;
+            $medical_staff->lastname = $request->lastname;
+            $medical_staff->username = $request->username;
+            $medical_staff->email = $request->email;
+            $medical_staff->password = bcrypt($request->password);
+            $medical_staff->mobileNo = $request->mobileNo;
+            $medical_staff->landline = $request->landline;
+            $medical_staff->birthday = $request->birthday;
+            $medical_staff->address = $request->address;
+            $medical_staff->refregion = $request->region;
+            $medical_staff->refprovince = $request->state;
+            $medical_staff->refcitymun = $request->city;
+            $medical_staff->postalcode = $request->postalcode;
+            $medical_staff->status = 'offline';
+            $medical_staff->category = 'client';
+            $medical_staff->owner = 1;
+            $medical_staff->assignRole(['owner','admin']);
+        }
     }
 
     /**

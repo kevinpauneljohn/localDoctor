@@ -41,18 +41,18 @@ class LoginController extends Controller
 
         $http = new Client();
 
-        $response = $http->post('https://doctorapp.devouterbox.com/oauth/token', [
-            'form_params' => [
-                'grant_type' => 'password',
-                'client_id' => '2',
-                'client_secret' => 'J4ORCAWx6LOJfZq8VGjlU0QAiu7xN0E1ryqdwYzF',
-                'username' => 'john@gmail.com',
-                'password' => '123',
-                'scope' => '',
-            ],
-        ]);
-        $data = json_decode((string) $response->getBody(), true);
-        $accessToken = $data['access_token'];
+//        $response = $http->post('https://doctorapp.devouterbox.com/oauth/token', [
+//            'form_params' => [
+//                'grant_type' => 'password',
+//                'client_id' => '2',
+//                'client_secret' => 'J4ORCAWx6LOJfZq8VGjlU0QAiu7xN0E1ryqdwYzF',
+//                'username' => 'john@gmail.com',
+//                'password' => '123',
+//                'scope' => '',
+//            ],
+//        ]);
+//        $data = json_decode((string) $response->getBody(), true);
+        $accessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzZiZjk1MGE5ZGUyYzBhNDQ3ZTJlNGVlY2FhMjg5NGU5MzJhMTM5YWViZThlYjBkOTY1OTFkMmZkM2MzZGNhZWM1YmNmZTA1MTFmZTY4MmUiLCJpYXQiOjE1Nzc5NzU1MzEsIm5iZiI6MTU3Nzk3NTUzMSwiZXhwIjoxNjA5NTk3OTMxLCJzdWIiOiIzNjUzYjdhYy00ZjM2LTQ0MjUtYWEwZi00Zjg2OGQxNGNlZjIiLCJzY29wZXMiOltdfQ.KNmQZ0725fkzYCUmaXEst_5puTSXW96oCfvzBnINOqIRJI0_KA94jlX4rXjj02XtKvYnEbuIPNC3COPKLSTSzAp6cLwVGsqUkXWAuBLudeM9sKfltpyne6KdOezhSv9HcVoR5Ka-cA681HFqHHEG3UwN16mV-XCjHBovaRn16LeU56FoBetFKpT1XKsPQozgQBOSwLRK3w1veSm0J0nDKbnzAC8Y1W9B_oKalzJLE2sQ4OK88oUuclNyKzIOTuCwcNvqM4MknzQyBgSFXK-Cg_PIrNl3rCuEy95oUHA2vXFR2HG7_Iim8AMVSrRHKTcd0_sbtaM9Vg-i0XAjMUCe5RR1JRDx53lZBZ6JE4Xt5ddeGrnT9lUxV19XHnsXKfEt2H0kSybu8yB9CF50XhU763Rh7cExpQEkzw5e8OgvIOFw1RwgztWmnI0SIF3JS9DcbyJFadZsm21QczXdOscvKg26fu0J5LRGIO0pBq8R_D4unp1tFsNeqzO1Ta49LGSqqP_B1cAyx65LDinNabrA7cSQf7ryysfMqJJFrFMmOuW56w0H_W1-AfiHrQEeuvv0pY91q0-8jYSXDjWL_rm1xu2h8ibRgwspiStObbNCBbyJveNxOaM3flaxMXiIm4JhIKB2kgxO6YXrbqrR8uzkJRkqZ970FsHKO7tm6rcfuNA';
 
         $response = $http->request('GET', 'https://doctorapp.devouterbox.com/api/user', [
             'headers' => [
