@@ -104,7 +104,7 @@ class MedicalStaffController extends Controller
             if($this->checkInternetConnection() > 0)
             {
                 //internet connection ok
-
+                //API callback
                 $client = new Client([
                     'headers' => [
                         'Accept' => 'application/json',
@@ -136,6 +136,7 @@ class MedicalStaffController extends Controller
             $medical_staff->refcitymun = $request->city;
             $medical_staff->status = 'offline';
             $medical_staff->category = 'client';
+            //default role for medical staffs
             $medical_staff->assignRole('medical staff');
             foreach ($request->position as $role)
             {
