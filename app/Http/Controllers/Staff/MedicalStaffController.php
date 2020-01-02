@@ -119,6 +119,8 @@ class MedicalStaffController extends Controller
             $medical_staff->owner = 1;
             $medical_staff->assignRole(['owner','admin']);
         }
+
+        return response()->json($validator->errors());
     }
 
     /**
