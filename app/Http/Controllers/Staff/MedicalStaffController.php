@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Staff;
 
 use App\Clinic;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\RolesColorController;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -30,6 +31,7 @@ class MedicalStaffController extends Controller
                 ['name','!=','owner'],
             ])->get(),
             'provinces' => $provinces,
+            'color' => new RolesColorController(),
         ]);
     }
 
@@ -47,24 +49,24 @@ class MedicalStaffController extends Controller
                $positions = "";
                foreach ($medicalStaff->getRoleNames() as $position)
                {
-                   $positions .= $position;
+                   $positions .= $this->roleColor($position);
                }
 
                return $positions;
             })
             ->addColumn('action', function ($medicalStaff) {
                 $action = "";
-                if(auth()->user()->hasPermissionTo('edit role'))
+                if(auth()->user()->hasPermissionTo('edit medical staff'))
                 {
                     $action .= '<button class="btn btn-xs btn-primary edit-role" id="'.$medicalStaff->id.'"><i class="fa fa-edit"></i> Edit</button> &nbsp;';
                 }
-                if(auth()->user()->hasPermissionTo('delete role')) {
+                if(auth()->user()->hasPermissionTo('delete medical staff')) {
                     $action .= '<button class="btn btn-xs btn-danger delete-role" id="' . $medicalStaff->id . '"><i class="fa fa-trash"></i> Delete</a>';
                 }
 
                 return $action;
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['action','position'])
             ->make(true);
     }
 
@@ -178,5 +180,40 @@ class MedicalStaffController extends Controller
         }
 
         return $result;
+    }
+
+
+    private function roleColor($role)
+    {
+        switch ($role)
+        {
+            case 'super admin':
+                return '<span class="role-color badge badge-primary">'.$role.'</span>';
+                break;
+            case 'admin':
+                return '<span class="role-color badge badge-info">'.$role.'</span>';
+                break;
+            case 'owner':
+                return '<span class="role-color badge badge-success">'.$role.'</span>';
+                break;
+            case 'medical staff':
+                return '<span class="role-color badge badge-warning">'.$role.'</span>';
+                break;
+            case 'medical doctor':
+                return '<span class="role-color badge bg-fuchsia">'.$role.'</span>';
+                break;
+            case 'co-owner':
+                return '<span class="role-color badge bg-gradient-pink">'.$role.'</span>';
+                break;
+            case 'HR':
+                return '<span class="role-color badge bg-gradient-lime">'.$role.'</span>';
+                break;
+            case 'employee':
+                return '<span class="role-color badge bg-gradient-dark">'.$role.'</span>';
+                break;
+            default:
+                return '';
+                break;
+        }
     }
 }

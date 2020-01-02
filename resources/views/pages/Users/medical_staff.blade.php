@@ -142,7 +142,7 @@
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" id="id">
-                <input type="hidden" name="url" id="url" value="roles">
+{{--                <input type="hidden" name="url" id="url" value="roles">--}}
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -205,6 +205,9 @@
     <style type="text/css">
         .delete_role{
             font-size: 20px;
+        }
+        .role-color {
+            margin-right:2px;
         }
     </style>
 @stop
