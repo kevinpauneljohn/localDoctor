@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Clinic;
+use App\ClinicUser;
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
@@ -101,31 +102,32 @@ class MedicalStaffController extends Controller
         if($validator->passes())
         {
 
-            if($this->checkInternetConnection() > 0)
-            {
-                //internet connection ok
-                //API callback
-                $client = new Client([
-                    'headers' => [
-                        'Accept' => 'application/json',
-                        'Authorization' => 'Bearer '.auth()->user()->api_token,
-                    ],
-                ]);
-
-                $response = $client->request('POST','https://doctorapp.devouterbox.com/api/userClients',[
-                    'json' => [
-                        'position' => $request->position,
-                        'firstname' => $request->firstname,
-                        'lastname' => $request->lastname,
-                        'mobileNo' => $request->mobileNo,
-                        'address' => $request->address,
-                        'province' => $request->province,
-                        'city' => $request->city,
-                    ],
-                ]);
-
-                return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
-            }
+//            if($this->checkInternetConnection() > 0)
+//            {
+//                //internet connection ok
+//                //API callback
+//                $client = new Client([
+//                    'headers' => [
+//                        'Accept' => 'application/json',
+//                        'Authorization' => 'Bearer '.auth()->user()->api_token,
+//                    ],
+//                ]);
+//
+//                //$response = $client->request('POST','https://doctorapp.devouterbox.com/api/userClients',[
+//                $response = $client->request('POST','http://outerboxpro.com/api/userClients',[
+//                    'json' => [
+//                        'position' => $request->position,
+//                        'firstname' => $request->firstname,
+//                        'lastname' => $request->lastname,
+//                        'mobileNo' => $request->mobileNo,
+//                        'address' => $request->address,
+//                        'province' => $request->province,
+//                        'city' => $request->city,
+//                    ],
+//                ]);
+//
+//                return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
+//            }
 
             $medical_staff = new User();
             $medical_staff->firstname = $request->firstname;
@@ -146,10 +148,11 @@ class MedicalStaffController extends Controller
 
             if($medical_staff->save())
             {
-                $access_token = $medical_staff->createToken('authToken')->accessToken;
-                $userToken  = User::find($medical_staff->id);
-                $userToken->api_token = $access_token;
-                $userToken->save();
+                $clinicMember = new ClinicUser();
+                $clinicMember->clinic_id = $request->clinic;
+                $clinicMember->user_id = $medical_staff->id;
+                $clinicMember->save();
+
                 return response()->json(['success' => true]);
             }
         }

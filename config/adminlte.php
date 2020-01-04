@@ -178,18 +178,13 @@ return [
 //            'topnav' => true,
 //        ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
             'text' => 'Dashboard',
             'url'  => '/dashboard',
             'icon' => 'fa fa-fw fa-home',
         ],
         [
             'text' => 'Clinics',
-            'url'  => '/clinics',
+            'route'  => 'clinics.index',
             'can'  => 'view clinic',
             'icon' => 'fa fa-fw fa fa-hospital-alt',
         ],

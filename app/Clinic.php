@@ -12,4 +12,9 @@ class Clinic extends Model
     use UsesUuid;
 
     protected $guarded = [];
+
+    public function users()
+    {
+        return $this->belongsToMany(Clinic::class);
+    }
 }

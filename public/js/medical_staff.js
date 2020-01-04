@@ -58,7 +58,7 @@ $(document).ready(function(){
             'POST',
             addForm.serialize() ,
             'New Medical Staff Successfully Created!',
-            false,
+            true,
             '',
             true
         );
