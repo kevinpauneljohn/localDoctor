@@ -88,7 +88,7 @@ class MedicalStaffController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-//            'clinic'    => 'required',
+            'clinic'    => 'required',
             'position'  => 'required',
             'firstname' => 'required',
             'lastname'  => 'required',

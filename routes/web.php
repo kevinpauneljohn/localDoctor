@@ -62,9 +62,14 @@ Route::delete('/medical-staffs/{staff}','Staff\MedicalStaffController@destroy')-
 Route::get('/medical-staffs-list','Staff\MedicalStaffController@medicalStaffList')->name('medicalStaffs.list')->middleware(['auth','permission:view medical staff']);
 /*end medical staffs*/
 
-Route::group(['middleware' => ['auth','permission:view clinic']],function (){
-    Route::get('/clinic-list','ClinicController@clinicList')->name('clinics.list');
-});
+/*clinics*/
+Route::get('/clinics','ClinicController@index')->name('clinics.index')->middleware(['auth','permission:view clinic']);
+Route::post('/clinics','ClinicController@store')->name('clinics.store')->middleware(['auth','permission:add clinic']);
+Route::put('/clinics/{clinic}','ClinicController@update')->name('clinics.update')->middleware(['auth','permission:edit clinic']);
+Route::delete('/clinics/{clinic}','ClinicController@destroy')->name('clinics.destroy')->middleware(['auth','permission:delete clinic']);
+Route::get('/clinic-list','ClinicController@clinicList')->name('clinics.list')->middleware(['auth','permission:view clinic']);
+/*end of clinics*/
+
 Route::group(['middleware' => ['auth','permission:view role']],function (){
     Route::get('/roles-list','RolesController@rolesList')->name('roles.list');
 });

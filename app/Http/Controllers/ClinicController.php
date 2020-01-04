@@ -23,9 +23,6 @@ class ClinicController extends Controller
         $clinics = Clinic::all();
 
         return DataTables::of($clinics)
-            ->addColumn('counter',function(){
-                return "";
-            })
             ->addColumn('action', function ($clinic) {
                 $action = '<a href="#" class="btn btn-xs btn-success"><i class="fa fa-eye"></i> View</a>';
                 $action .= '<a href="#" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>';

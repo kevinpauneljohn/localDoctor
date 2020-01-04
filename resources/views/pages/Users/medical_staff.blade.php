@@ -66,7 +66,7 @@
                         <div class="modal-body">
                             <div class="form-group clinic">
                                 <label for="clinic">Clinics</label><span class="required">*</span>
-                                <select class="form-control select2" name="clinic" id="clinic" style="width:100%;">
+                                <select class="form-control" name="clinic" id="clinic" style="width:100%;">
                                     <option value=""> -- Select Clinic --</option>
                                     @foreach($clinics as $clinic)
                                         <option value="{{$clinic->id}}">{{$clinic->name}}</option>
