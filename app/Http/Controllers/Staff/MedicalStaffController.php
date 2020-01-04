@@ -126,6 +126,7 @@ class MedicalStaffController extends Controller
 
                 return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
             }
+
             $medical_staff = new User();
             $medical_staff->firstname = $request->firstname;
             $medical_staff->middlename = $request->middlename;
