@@ -87,13 +87,16 @@
                             <div class="row">
                                 <div class="col-lg-6 state">
                                     <label for="state">State</label>
-                                    <select class="form-control" name="state" id="state">
-
+                                    <select class="form-control state-list" name="state" id="state">
+                                        <option value=""> -- Select State -- </option>
+                                        @foreach($provinces as $province)
+                                            <option value="{{$province->provCode}}">{{$province->provDesc}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-lg-6 city">
                                     <label for="city">City</label>
-                                    <select class="form-control" name="city" id="city">
+                                    <select class="form-control city-list" name="city" id="city">
 
                                     </select>
                                 </div>
@@ -140,6 +143,28 @@
             });
 
             $('[data-mask]').inputmask();
+        });
+
+        /*fetch city*/
+        $(document).ready(function(){
+            let state = $('.state-list');
+            let city = $('.city-list');
+
+            state.change(function () {
+                city.html("");
+                $.ajax({
+                    'url' : '/address/city/'+state.val(),
+                    'type' : 'GET',
+                    success: function(result){
+                        city.append('<option value="">-- Select City --</option>');
+                        $.each(result, function ( key , value ) {
+                            city.append('<option value="'+value.citymunCode+'">'+value.citymunDesc+'</option>');
+                        });
+                    },error(xhr, status, error){
+                        console.log("error: "+error+" status: "+status+" xhr: "+xhr);
+                    }
+                });
+            });
         });
     </script>
 @stop

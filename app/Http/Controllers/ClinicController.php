@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Clinic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
 class ClinicController extends Controller
@@ -15,7 +17,10 @@ class ClinicController extends Controller
      */
     public function index()
     {
-        return view('pages.Clinic.index');
+        $provinces = DB::table('refprovince')->orderBy('provDesc','asc')->get();
+        return view('pages.Clinic.index')->with([
+            'provinces' => $provinces,
+        ]);
     }
 
     public function clinicList()
@@ -54,7 +59,9 @@ class ClinicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all() , [
+            'name'      => 'required|unique:clinics,name',
+        ]);
     }
 
     /**
