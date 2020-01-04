@@ -68,7 +68,6 @@ $(document).ready(function(){
 
 $(document).on('click','.edit-btn',function(){
     let id = this.id;
-    let formContainer = '.edit-clinic-form';
     let selected = "";
 
     $.ajax({
