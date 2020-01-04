@@ -32,7 +32,7 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Position</th>
-                        <th>Action</th>
+                        <th width="20%">Action</th>
                     </tr>
                     </thead>
 

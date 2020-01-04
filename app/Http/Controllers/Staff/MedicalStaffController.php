@@ -56,12 +56,16 @@ class MedicalStaffController extends Controller
             })
             ->addColumn('action', function ($medicalStaff) {
                 $action = "";
+                if(auth()->user()->hasPermissionTo('view medical staff'))
+                {
+                    $action .= '<button class="btn btn-xs btn-success view-staff" id="'.$medicalStaff->id.'"><i class="fa fa-eye"></i> View</button>';
+                }
                 if(auth()->user()->hasPermissionTo('edit medical staff'))
                 {
-                    $action .= '<button class="btn btn-xs btn-primary edit-role" id="'.$medicalStaff->id.'"><i class="fa fa-edit"></i> Edit</button>';
+                    $action .= '<button class="btn btn-xs btn-primary edit-staff" id="'.$medicalStaff->id.'"><i class="fa fa-edit"></i> Edit</button>';
                 }
                 if(auth()->user()->hasPermissionTo('delete medical staff')) {
-                    $action .= '<button class="btn btn-xs btn-danger delete-role" id="' . $medicalStaff->id . '"><i class="fa fa-trash"></i> Delete</a>';
+                    $action .= '<button class="btn btn-xs btn-danger delete-staff" id="' . $medicalStaff->id . '"><i class="fa fa-trash"></i> Delete</a>';
                 }
 
                 return $action;
