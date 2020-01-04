@@ -87,6 +87,7 @@ class ClinicController extends Controller
             $clinic->address = $request->address;
             $clinic->state = $request->state;
             $clinic->city = $request->city;
+            $clinic->user_id = auth()->user()->id;
             $clinic->status = "active";
 
             if($clinic->save())
@@ -108,7 +109,21 @@ class ClinicController extends Controller
      */
     public function show($id)
     {
-        $clinic = Clinic::find($id);
+        $clinic = Clinic::findOrFail($id);
+        $cities = DB::table('refcitymun')->where('provCode',$clinic->state)->get();
+        $object = [
+            'id'  => $clinic->id,
+            'name'  => $clinic->name,
+            'address'  => $clinic->address,
+            'state'  => $clinic->state,
+            'city'  => $clinic->city,
+            'landline'  => $clinic->landline,
+            'mobile'  => $clinic->mobile,
+            'user_id'  => $clinic->user_id,
+            'cities'  => $cities,
+        ];
+
+        return $object;
     }
 
     /**

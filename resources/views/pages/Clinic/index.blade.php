@@ -68,25 +68,25 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group name">
-                                <label for="name">Name</label>
+                                <label for="name">Name</label><span class="required">*</span>
                                 <input type="text" name="name" class="form-control" id="name">
                             </div>
                             <div class="form-group landline">
-                                <label for="landline">Landline</label>
+                                <label for="landline">Landline</label><span class="required">*</span>
                                 <input type="text" name="landline" class="form-control" id="landline" data-inputmask='"mask": "(999) 999-9999"' data-mask>
                             </div>
                             <div class="form-group mobileNo">
-                                <label for="mobileNo">Mobile No.</label>
+                                <label for="mobileNo">Mobile No.</label><span class="required">*</span>
                                 <input type="text" name="mobileNo" class="form-control" id="mobileNo" data-inputmask='"mask": "(9999) 999-9999"' data-mask>
                             </div>
 
                             <div class="form-group address">
-                                <label for="address">Street/House/Bldg. Address</label>
+                                <label for="address">Street/House/Bldg. Address</label><span class="required">*</span>
                                 <input type="text" name="address" class="form-control" id="address">
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 state">
-                                    <label for="state">State</label>
+                                    <label for="state">State</label><span class="required">*</span>
                                     <select class="form-control state-list" name="state" id="state">
                                         <option value=""> -- Select State -- </option>
                                         @foreach($provinces as $province)
@@ -95,7 +95,7 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6 city">
-                                    <label for="city">City</label>
+                                    <label for="city">City</label><span class="required">*</span>
                                     <select class="form-control city-list" name="city" id="city">
 
                                     </select>
@@ -132,25 +132,25 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group edit_name">
-                                <label for="edit_name">Name</label>
+                                <label for="edit_name">Name</label><span class="required">*</span>
                                 <input type="text" name="edit_name" class="form-control" id="edit_name">
                             </div>
                             <div class="form-group edit_landline">
-                                <label for="edit_landline">Landline</label>
-                                <input type="text" name="edit_landline" class="form-control" id="ledit_andline" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+                                <label for="edit_landline">Landline</label><span class="required">*</span>
+                                <input type="text" name="edit_landline" class="form-control" id="edit_landline" data-inputmask='"mask": "(999) 999-9999"' data-mask>
                             </div>
                             <div class="form-group edit_mobileNo">
-                                <label for="edit_mobileNo">Mobile No.</label>
+                                <label for="edit_mobileNo">Mobile No.</label><span class="required">*</span>
                                 <input type="text" name="edit_mobileNo" class="form-control" id="edit_mobileNo" data-inputmask='"mask": "(9999) 999-9999"' data-mask>
                             </div>
 
                             <div class="form-group edit_address">
-                                <label for="edit_address">Street/House/Bldg. Address</label>
+                                <label for="edit_address">Street/House/Bldg. Address</label><span class="required">*</span>
                                 <input type="text" name="edit_address" class="form-control" id="edit_address">
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 edit_state">
-                                    <label for="edit_state">State</label>
+                                    <label for="edit_state">State</label><span class="required">*</span>
                                     <select class="form-control state-list" name="edit_state" id="edit_state">
                                         <option value=""> -- Select State -- </option>
                                         @foreach($provinces as $province)
@@ -159,7 +159,7 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6 edit_city">
-                                    <label for="edit_city">City</label>
+                                    <label for="edit_city">City</label><span class="required">*</span>
                                     <select class="form-control city-list" name="edit_city" id="edit_city">
 
                                     </select>

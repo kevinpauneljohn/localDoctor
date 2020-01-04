@@ -68,13 +68,30 @@ $(document).ready(function(){
 
 $(document).on('click','.edit-btn',function(){
     let id = this.id;
+    let formContainer = '.edit-clinic-form';
+    let selected = "";
 
     $.ajax({
         'url' : '/clinics/'+id,
         'type' : 'GET',
         'cache' : false,
         success: function(result){
-            console.log(result);
+            console.log(result.name);
+            $('#id').val(result.id);
+            $('#edit_name').val(result.name);
+            $('#edit_landline').val(result.landline);
+            $('#edit_mobileNo').val(result.mobile);
+            $('#edit_address').val(result.address);
+            $('#edit_state').val(result.state);
+
+            $('#edit_city').append('<option value="">-- Select City --</option>');
+            $.each(result.cities, function (key, value) {
+                if(value.citymunCode === result.city)
+                {
+                    selected = ' selected="selected"';
+                }
+                $('#edit_city').append('<option value="'+value.citymunCode+'"'+selected+'>'+value.citymunDesc+'</option>');
+            });
         },error: function(xhr, status, error){
             console.log(xhr);
         }
