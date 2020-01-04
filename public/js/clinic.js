@@ -49,19 +49,34 @@ function submitform(url , type , data , message , reload = true, elementAttr, co
     });
 }
 $(document).ready(function(){
-    let addForm = $('#medical-staff-form');
+    let addForm = $('#clinic-form');
 
     addForm.submit(function(form){
         form.preventDefault();
         submitform(
-            '/medical-staffs',
+            '/clinics',
             'POST',
             addForm.serialize() ,
-            'New Medical Staff Successfully Created!',
-            false,
+            'New Clinic Successfully Created!',
+            true,
             '',
-            true
+            false
         );
-        clear_errors("clinic","position","firstname","lastname","mobileNo","address","province","city");
+        clear_errors("name","landline","mobileNo","address","state","city");
+    });
+});
+
+$(document).on('click','.edit-btn',function(){
+    let id = this.id;
+
+    $.ajax({
+        'url' : '/clinics/'+id,
+        'type' : 'GET',
+        'cache' : false,
+        success: function(result){
+            console.log(result);
+        },error: function(xhr, status, error){
+            console.log(xhr);
+        }
     });
 });

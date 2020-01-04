@@ -57,7 +57,7 @@ class MedicalStaffController extends Controller
                 $action = "";
                 if(auth()->user()->hasPermissionTo('edit medical staff'))
                 {
-                    $action .= '<button class="btn btn-xs btn-primary edit-role" id="'.$medicalStaff->id.'"><i class="fa fa-edit"></i> Edit</button> &nbsp;';
+                    $action .= '<button class="btn btn-xs btn-primary edit-role" id="'.$medicalStaff->id.'"><i class="fa fa-edit"></i> Edit</button>';
                 }
                 if(auth()->user()->hasPermissionTo('delete medical staff')) {
                     $action .= '<button class="btn btn-xs btn-danger delete-role" id="' . $medicalStaff->id . '"><i class="fa fa-trash"></i> Delete</a>';

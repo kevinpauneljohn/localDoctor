@@ -67,6 +67,7 @@ Route::get('/clinics','ClinicController@index')->name('clinics.index')->middlewa
 Route::post('/clinics','ClinicController@store')->name('clinics.store')->middleware(['auth','permission:add clinic']);
 Route::put('/clinics/{clinic}','ClinicController@update')->name('clinics.update')->middleware(['auth','permission:edit clinic']);
 Route::delete('/clinics/{clinic}','ClinicController@destroy')->name('clinics.destroy')->middleware(['auth','permission:delete clinic']);
+Route::get('/clinics/{clinic}','ClinicController@show')->name('clinics.show')->middleware(['auth','permission:view clinic']);
 Route::get('/clinic-list','ClinicController@clinicList')->name('clinics.list')->middleware(['auth','permission:view clinic']);
 /*end of clinics*/
 

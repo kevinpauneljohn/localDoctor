@@ -29,11 +29,18 @@ class ClinicController extends Controller
 
         return DataTables::of($clinics)
             ->addColumn('action', function ($clinic) {
-                $action = '<a href="#" class="btn btn-xs btn-success"><i class="fa fa-eye"></i> View</a>';
-                $action .= '<a href="#" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>';
-                if(auth()->user()->hasAnyRole(['super admin']))
+                $action = "";
+                if(auth()->user()->hasPermissionTo('view clinic'))
                 {
-                    $action .= '<a href="#" class="btn btn-xs btn-danger delete-job" data-toggle="modal" data-target="#delete-job-order" id="job-order-'.$clinic->id.'"><i class="fa fa-trash"></i> Delete</a>';
+                    $action .= '<a href="#" class="btn btn-xs btn-success"><i class="fa fa-eye"></i> View</a>';
+                }
+                if(auth()->user()->hasPermissionTo('edit clinic'))
+                {
+                    $action .= '<a href="#" class="btn btn-xs btn-primary edit-btn" data-toggle="modal" data-target="#edit-clinic-modal" id="'.$clinic->id.'"><i class="fa fa-edit"></i> Edit</a>';
+                }
+                if(auth()->user()->hasPermissionTo('delete clinic'))
+                {
+                    $action .= '<a href="#" class="btn btn-xs btn-danger delete-btn" data-toggle="modal" data-target="#delete-job-order" id="job-order-'.$clinic->id.'"><i class="fa fa-trash"></i> Delete</a>';
                 }
                 return $action;
             })
@@ -61,7 +68,36 @@ class ClinicController extends Controller
     {
         $validator = Validator::make($request->all() , [
             'name'      => 'required|unique:clinics,name',
+            'address'   => 'required',
+            'state'     => 'required',
+            'city'      => 'required',
+            'landline'  => 'required',
+            'mobileNo'    => 'required',
         ]);
+
+
+        if($validator->passes())
+        {
+            $response = false;
+
+            $clinic = new Clinic();
+            $clinic->name = $request->name;
+            $clinic->landline = $request->landline;
+            $clinic->mobile = $request->mobileNo;
+            $clinic->address = $request->address;
+            $clinic->state = $request->state;
+            $clinic->city = $request->city;
+            $clinic->status = "active";
+
+            if($clinic->save())
+            {
+                $response = true;
+            }
+
+            return response()->json(['success' => $response]);
+        }
+        return response()->json($validator->errors());
+
     }
 
     /**
@@ -72,7 +108,7 @@ class ClinicController extends Controller
      */
     public function show($id)
     {
-        //
+        $clinic = Clinic::find($id);
     }
 
     /**

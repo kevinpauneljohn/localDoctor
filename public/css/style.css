@@ -16,3 +16,8 @@ table{
 .roles-cell .badge{
     margin-right:3px;
 }
+
+/*Jan. 04, 2020*/
+.btn-xs{
+    margin-left:2px;
+}
