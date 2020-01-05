@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\UserCreated;
 use App\Traits\UsesUuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,6 +16,10 @@ class User extends Authenticatable
 {
     use Notifiable, SoftDeletes, HasRoles, LogsActivity;
     use UsesUuid, HasApiTokens;
+
+    protected $dispatchesEvents = [
+        'created'   => UserCreated::class
+    ];
 
     /**
      * The attributes that are mass assignable.

@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'license'   => '700ae011-b619-4b18-9a73-3dc6292c8e71'
+    'license'   => 'cca89dc0-94fa-463f-ab97-3c244e3fc15b'
 ];
