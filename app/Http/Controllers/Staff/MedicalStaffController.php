@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Staff;
 
 use App\Clinic;
 use App\ClinicUser;
+use App\Events\CreateMedicalStaffEvent;
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
@@ -157,6 +158,7 @@ class MedicalStaffController extends Controller
                 $clinicMember->user_id = $medical_staff->id;
                 $clinicMember->save();
 
+                event(new CreateMedicalStaffEvent($medical_staff, $clinicMember));
                 return response()->json(['success' => true]);
             }
         }

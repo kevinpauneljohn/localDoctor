@@ -17,9 +17,9 @@ class User extends Authenticatable
     use Notifiable, SoftDeletes, HasRoles, LogsActivity;
     use UsesUuid, HasApiTokens;
 
-    protected $dispatchesEvents = [
-        'created'   => UserCreated::class
-    ];
+//    protected $dispatchesEvents = [
+//        'created'   => UserCreated::class
+//    ];
 
     /**
      * The attributes that are mass assignable.
@@ -82,6 +82,6 @@ class User extends Authenticatable
 
     public function clinics()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class,'clinic_user');
     }
 }

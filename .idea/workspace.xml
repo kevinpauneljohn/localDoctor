@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7a1611bb-0f38-4d42-90a8-e9900fd17232" name="Default Changelist" comment="medical staff">
+    <list default="true" id="7a1611bb-0f38-4d42-90a8-e9900fd17232" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Clinic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Clinic.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Staff/MedicalStaffController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Staff/MedicalStaffController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/terminal.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/terminal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/medical_staff.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/medical_staff.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,47 +35,35 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.88105005">
+    <splitter split-orientation="horizontal" split-proportion="0.44115227">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/resources/views/pages/Users/medical_staff.blade.php">
+            <entry file="file://$PROJECT_DIR$/app/Events/UserCreated.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="522">
-                  <caret line="50" selection-start-line="50" selection-end-line="50" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/database/migrations/2020_01_04_162229_add_user_id_to_clinics_table.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="476">
-                  <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="42" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/database/migrations/2020_01_04_212556_clinic_user.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="272">
-                  <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="20" selection-end-column="34" />
+                <state relative-caret-position="269">
+                  <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
                   <folding>
-                    <element signature="e#7#52#0#PHP" expanded="true" />
+                    <element signature="e#30#43#0#PHP" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/ClinicUser.php">
+            <entry file="file://$PROJECT_DIR$/app/Events/CreateMedicalStaffEvent.php">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="306">
-                  <caret line="18" selection-start-line="18" selection-end-line="18" />
-                  <folding>
-                    <element signature="e#23#62#0#PHP" expanded="true" />
-                  </folding>
+                  <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/Listeners/CreateMedicalStaffListener.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="442">
+                  <caret line="30" column="50" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
                 </state>
               </provider>
             </entry>
@@ -83,8 +71,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Staff/MedicalStaffController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2569">
-                  <caret line="60" column="139" selection-start-line="60" selection-start-column="139" selection-end-line="60" selection-end-column="139" />
+                <state relative-caret-position="283">
+                  <caret line="153" column="37" selection-start-line="153" selection-start-column="37" selection-end-line="153" selection-end-column="37" />
                   <folding>
                     <element signature="e#46#61#0#PHP" expanded="true" />
                   </folding>
@@ -95,55 +83,10 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/User.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="522">
-                  <caret line="85" column="5" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
+                <state relative-caret-position="323">
+                  <caret line="19" column="6" lean-forward="true" selection-start-line="19" selection-start-column="6" selection-end-line="21" selection-end-column="8" />
                   <folding>
                     <element signature="e#23#50#0#PHP" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/Events/UserCreated.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="269">
-                  <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-                  <folding>
-                    <element signature="e#30#43#0#PHP" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/Listeners/UserCreatedListener.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="46" column="61" lean-forward="true" selection-start-line="46" selection-start-column="61" selection-end-line="46" selection-end-column="61" />
-                  <folding>
-                    <element signature="e#33#60#0#PHP" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/Threshold.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="102">
-                  <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/Providers/EventServiceProvider.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="301">
-                  <caret line="19" column="30" lean-forward="true" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-                  <folding>
-                    <element signature="e#33#60#0#PHP" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -156,13 +99,25 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/public/js/clinic.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-294">
+                <state relative-caret-position="799">
                   <caret line="47" column="9" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/Listeners/UserCreatedListener.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="388">
+                  <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="57" />
+                  <folding>
+                    <element signature="e#33#60#0#PHP" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/public/js/medical_staff.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="454">
@@ -230,18 +185,20 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/CustomAuth/LoginController.php" />
         <option value="$PROJECT_DIR$/config/adminlte.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ClinicController.php" />
-        <option value="$PROJECT_DIR$/app/Clinic.php" />
         <option value="$PROJECT_DIR$/database/migrations/2020_01_04_212556_clinic_user.php" />
         <option value="$PROJECT_DIR$/app/ClinicUser.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Staff/MedicalStaffController.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/Users/medical_staff.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2020_01_04_222300_create_thresholds_table.php" />
         <option value="$PROJECT_DIR$/config/terminal.php" />
         <option value="$PROJECT_DIR$/app/Events/UserCreated.php" />
-        <option value="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" />
         <option value="$PROJECT_DIR$/public/js/medical_staff.js" />
-        <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/app/Listeners/UserCreatedListener.php" />
+        <option value="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" />
+        <option value="$PROJECT_DIR$/app/Clinic.php" />
+        <option value="$PROJECT_DIR$/app/User.php" />
+        <option value="$PROJECT_DIR$/app/Events/CreateMedicalStaffEvent.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Staff/MedicalStaffController.php" />
+        <option value="$PROJECT_DIR$/app/Listeners/CreateMedicalStaffListener.php" />
       </list>
     </option>
   </component>
@@ -396,6 +353,27 @@
               <item name="localDoctor" type="b2602c69:ProjectViewProjectNode" />
               <item name="localDoctor" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="localDoctor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="localDoctor" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="localDoctor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="localDoctor" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="Staff" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="localDoctor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="localDoctor" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Listeners" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -461,7 +439,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../doctor" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -507,7 +485,8 @@
       <workItem from="1578134871637" duration="776000" />
       <workItem from="1578139368160" duration="17686000" />
       <workItem from="1578167320888" duration="394000" />
-      <workItem from="1578167754478" duration="13612000" />
+      <workItem from="1578167754478" duration="14219000" />
+      <workItem from="1578292262372" duration="3778000" />
     </task>
     <task id="LOCAL-00001" summary="setup">
       <created>1577384046998</created>
@@ -677,17 +656,24 @@
       <option name="project" value="LOCAL" />
       <updated>1578177103981</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="medical staff">
+      <created>1578190974604</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1578190974604</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108136000" />
+    <option name="totallyTimeSpent" value="112521000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1818792" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18456376" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -746,20 +732,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="medical staff" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_12_29_163213_add_api_tokens_to_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_01_02_173338_change_password_column_to_nullable.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/permission.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-119">
@@ -976,16 +948,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Clinic.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="51" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
-          <folding>
-            <element signature="e#23#47#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClinicController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1013,16 +975,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/clinic.js">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_01_04_222300_create_thresholds_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-294">
-          <caret line="47" column="9" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
+        <state relative-caret-position="238">
+          <caret line="16" column="12" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="20" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pages/Users/medical_staff.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
+        <state relative-caret-position="850">
           <caret line="50" selection-start-line="50" selection-end-line="50" />
         </state>
       </provider>
@@ -1036,11 +998,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2020_01_04_212556_clinic_user.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
+        <state relative-caret-position="238">
           <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="20" selection-end-column="34" />
           <folding>
             <element signature="e#7#52#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ClinicUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="e#23#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/clinic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="47" column="9" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -1051,47 +1030,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_01_04_222300_create_thresholds_table.php">
+    <entry file="file://$PROJECT_DIR$/public/js/medical_staff.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="16" column="12" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="20" selection-end-column="33" />
+        <state relative-caret-position="454">
+          <caret line="60" column="17" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/ClinicUser.php">
+    <entry file="file://$PROJECT_DIR$/app/Clinic.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="340">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
           <folding>
-            <element signature="e#23#62#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Staff/MedicalStaffController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2569">
-          <caret line="60" column="139" selection-start-line="60" selection-start-column="139" selection-end-line="60" selection-end-column="139" />
-          <folding>
-            <element signature="e#46#61#0#PHP" expanded="true" />
+            <element signature="e#23#47#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Providers/EventServiceProvider.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="19" column="30" lean-forward="true" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+        <state relative-caret-position="420">
+          <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
           <folding>
             <element signature="e#33#60#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/medical_staff.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="60" column="17" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -1104,8 +1066,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="85" column="5" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
+        <state relative-caret-position="323">
+          <caret line="19" column="6" lean-forward="true" selection-start-line="19" selection-start-column="6" selection-end-line="21" selection-end-column="8" />
           <folding>
             <element signature="e#23#50#0#PHP" expanded="true" />
           </folding>
@@ -1115,20 +1077,44 @@
     <entry file="file://$PROJECT_DIR$/app/Events/UserCreated.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
-          <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
           <folding>
             <element signature="e#30#43#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Events/CreateMedicalStaffEvent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Staff/MedicalStaffController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="153" column="37" selection-start-line="153" selection-start-column="37" selection-end-line="153" selection-end-column="37" />
+          <folding>
+            <element signature="e#46#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Listeners/UserCreatedListener.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="46" column="61" lean-forward="true" selection-start-line="46" selection-start-column="61" selection-end-line="46" selection-end-column="61" />
+        <state relative-caret-position="388">
+          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="57" />
           <folding>
             <element signature="e#33#60#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Listeners/CreateMedicalStaffListener.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="30" column="50" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
         </state>
       </provider>
     </entry>
