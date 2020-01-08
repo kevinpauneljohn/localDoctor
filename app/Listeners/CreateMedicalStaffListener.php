@@ -34,5 +34,13 @@ class CreateMedicalStaffListener
         $threshold->data = $obj->merge($event->clinics);
         $threshold->action = "created medical staff";
         $threshold->save();
+
+        $host="facebook.comasf";
+
+        exec("ping -n 4 " . $host, $output, $result);
+
+//        print_r($output);
+
+        return response()->json($result);
     }
 }
