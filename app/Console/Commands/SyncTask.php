@@ -77,7 +77,7 @@ class SyncTask extends Command
     }
 
     /**
-     * Jan. 08, 2019
+     * Jan. 08, 2020
      * @author john kevin paunel
      * api endpoint for transfering rows from threshold table origin local to server destination
      * @param  string $causer_id
