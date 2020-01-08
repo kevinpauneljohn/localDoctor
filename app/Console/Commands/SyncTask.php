@@ -46,19 +46,29 @@ class SyncTask extends Command
         exec("ping -n 4 " . $host, $output, $result);
 
 //        return $result;
+        if($result === 0)
+        {
+            $thresholds = Threshold::all();
+            foreach ($thresholds as $threshold){
+                $server = $this->sendToServer(
+                    $threshold->causer_id,
+                    config('terminal.license'),
+                    $threshold->data,
+                    $threshold->action,
+                    date('Y-m-d h:i:s', strtotime($threshold->created_at)),
+                    date('Y-m-d h:i:s', strtotime($threshold->updated_at))
+                );
 
-        $thresholds = Threshold::all();
-        foreach ($thresholds as $threshold){
-            $server = $this->sendToServer(
-                $threshold->causer_id,
-                config('terminal.license'),
-                $threshold->data,
-                $threshold->action,
-                date('Y-m-d h:i:s', strtotime($threshold->created_at)),
-                date('Y-m-d h:i:s', strtotime($threshold->updated_at))
-            );
+                $success = "0";
+                if($server === 1)
+                {
+                    $thresholdTrash = Threshold::find($threshold->id);
+                    $thresholdTrash->delete();
+                    $success = "1";
+                }
+                echo 'Threshold ID: '.$threshold->id.', Status: '.$success;
+            }
         }
-        echo $server;
     }
 
     public function sendToServer($causer_id, $terminal_id, $data, $action, $created_at, $updated_at)
@@ -85,6 +95,6 @@ class SyncTask extends Command
             ],
         ]);
 
-        return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
+        return json_decode($response->getBody());
     }
 }

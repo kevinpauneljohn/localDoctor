@@ -93,18 +93,29 @@ class UserController extends Controller
 
 //        return $result;
 
-        $thresholds = Threshold::all();
-        foreach ($thresholds as $threshold){
-            $server = $this->sendToServer(
-                $threshold->causer_id,
-                config('terminal.license'),
-                $threshold->data,
-                $threshold->action,
-                date('Y-m-d h:i:s', strtotime($threshold->created_at)),
-                date('Y-m-d h:i:s', strtotime($threshold->updated_at))
-            );
+        if($result === 0)
+        {
+            $thresholds = Threshold::all();
+            foreach ($thresholds as $threshold){
+                $server = $this->sendToServer(
+                    $threshold->causer_id,
+                    config('terminal.license'),
+                    $threshold->data,
+                    $threshold->action,
+                    date('Y-m-d h:i:s', strtotime($threshold->created_at)),
+                    date('Y-m-d h:i:s', strtotime($threshold->updated_at))
+                );
+            }
+            if($server === 1)
+            {
+                return 'success';
+            }else{
+                return 'failed';
+            }
+//            return $server;
+
         }
-        return $server;
+
     }
 
     public function sendToServer($causer_id, $terminal_id, $data, $action, $created_at, $updated_at)
@@ -131,7 +142,8 @@ class UserController extends Controller
             ],
         ]);
 
-        return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
+        //return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
+        return json_decode($response->getBody());
     }
 }
 
