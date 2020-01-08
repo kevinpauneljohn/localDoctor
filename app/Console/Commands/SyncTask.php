@@ -41,13 +41,16 @@ class SyncTask extends Command
      */
     public function handle()
     {
+        /*this will check if the connection is good*/
         $host="outerboxpro.com";
 
         exec("ping -n 4 " . $host, $output, $result);
 
 //        return $result;
+        /*will return 0 if there is response from the server*/
         if($result === 0)
         {
+            /*this will retrieve all rows from thresholds table*/
             $thresholds = Threshold::all();
             foreach ($thresholds as $threshold){
                 $server = $this->sendToServer(
@@ -60,8 +63,10 @@ class SyncTask extends Command
                 );
 
                 $success = "0";
+                /*will return 1 if the transfer was success*/
                 if($server === 1)
                 {
+                    /*will delete the rows if the data was transferred successfully*/
                     $thresholdTrash = Threshold::find($threshold->id);
                     $thresholdTrash->delete();
                     $success = "1";
@@ -71,6 +76,18 @@ class SyncTask extends Command
         }
     }
 
+    /**
+     * Jan. 08, 2019
+     * @author john kevin paunel
+     * api endpoint for transfering rows from threshold table origin local to server destination
+     * @param  string $causer_id
+     * @param string $terminal_id
+     * @param string $data
+     * @param string $action
+     * @param string $created_at
+     * @param string $updated_at
+     * @return mixed
+     * */
     public function sendToServer($causer_id, $terminal_id, $data, $action, $created_at, $updated_at)
     {
         //internet connection ok
