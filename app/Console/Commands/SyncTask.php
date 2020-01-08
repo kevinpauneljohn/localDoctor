@@ -44,6 +44,6 @@ class SyncTask extends Command
         $terminal->causer_id = '42a5dc8a-deeb-4569-ac0e-fc8b45db0782';
         $terminal->data = User::find('42a5dc8a-deeb-4569-ac0e-fc8b45db0782');
         $terminal->action = "test only";
-        $terminal->save();
+        //$terminal->save();
     }
 }

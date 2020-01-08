@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth']], function(){
 
 });
 
-
+Route::get('/hello','UserController@test');
 /*permissions*/
 Route::get('/permissions','PermissionController@index')->name('permissions.index')->middleware(['auth']);
 Route::post('/permissions','PermissionController@store')->name('permissions.store')->middleware(['auth','permission:add permission']);
@@ -77,3 +77,5 @@ Route::group(['middleware' => ['auth','permission:view role']],function (){
 Route::group(['middleware' => ['auth','permission:view permission']],function (){
     Route::get('/permissions-list','PermissionController@permissionList')->name('permissions.list');
 });
+
+

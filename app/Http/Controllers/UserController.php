@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Threshold;
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -81,4 +83,17 @@ class UserController extends Controller
     {
         //
     }
+
+    public function test()
+    {
+        $test ="test";
+        $terminal = new Threshold();
+        $terminal->causer_id = '42a5dc8a-deeb-4569-ac0e-fc8b45db0782';
+        $terminal->data = User::find('42a5dc8a-deeb-4569-ac0e-fc8b45db0782');
+        $terminal->action = "test only";
+        $terminal->save();
+
+        return response()->json(['success' => true]);
+    }
 }
+
