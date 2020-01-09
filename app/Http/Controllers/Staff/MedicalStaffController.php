@@ -106,34 +106,6 @@ class MedicalStaffController extends Controller
 
         if($validator->passes())
         {
-
-//            if($this->checkInternetConnection() > 0)
-//            {
-//                //internet connection ok
-//                //API callback
-//                $client = new Client([
-//                    'headers' => [
-//                        'Accept' => 'application/json',
-//                        'Authorization' => 'Bearer '.auth()->user()->api_token,
-//                    ],
-//                ]);
-//
-//                //$response = $client->request('POST','https://doctorapp.devouterbox.com/api/userClients',[
-//                $response = $client->request('POST','http://outerboxpro.com/api/userClients',[
-//                    'json' => [
-//                        'position' => $request->position,
-//                        'firstname' => $request->firstname,
-//                        'lastname' => $request->lastname,
-//                        'mobileNo' => $request->mobileNo,
-//                        'address' => $request->address,
-//                        'province' => $request->province,
-//                        'city' => $request->city,
-//                    ],
-//                ]);
-//
-//                return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
-//            }
-
             $medical_staff = new User();
             $medical_staff->firstname = $request->firstname;
             $medical_staff->middlename = $request->middlename;
