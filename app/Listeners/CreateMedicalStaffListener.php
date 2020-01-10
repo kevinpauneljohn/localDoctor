@@ -38,23 +38,20 @@ class CreateMedicalStaffListener
 
         if($threshold->save())
         {
-            //if($this->ping("outerboxpro.com") === 0)
-            if($this->ping("doctorapp.devouterbox.com") === 0)
-            {
-                /*this will retrieve all rows from thresholds table*/
-                $thresholds = Threshold::all();
-                foreach ($thresholds as $threshold){
-                    $server = $this->sendToServer(
-                        $threshold->causer_id,
-                        config('terminal.license'),
-                        $threshold->data,
-                        $threshold->action,
-                        date('Y-m-d h:i:s', strtotime($threshold->created_at)),
-                        date('Y-m-d h:i:s', strtotime($threshold->updated_at))
-                    );
+            /*this will retrieve all rows from thresholds table*/
+            $thresholds = Threshold::all();
+            foreach ($thresholds as $threshold){
+                $server = $this->sendToServer(
+                    $threshold->causer_id,
+                    config('terminal.license'),
+                    $threshold->data,
+                    $threshold->action,
+                    date('Y-m-d h:i:s', strtotime($threshold->created_at)),
+                    date('Y-m-d h:i:s', strtotime($threshold->updated_at))
+                );
 
-                    $success = "0";
-                    /*will return 1 if the transfer was success*/
+                $success = "0";
+                /*will return 1 if the transfer was success*/
 //                    if($server === 1)
 //                    {
 //                        /*will delete the rows if the data was transferred successfully*/
@@ -62,7 +59,6 @@ class CreateMedicalStaffListener
 //                        $thresholdTrash->delete();
 //                        $success = "1";
 //                    }
-                }
             }
         }
     }
@@ -102,13 +98,13 @@ class CreateMedicalStaffListener
         $userToken = User::findOrFail($causer_id)->api_token;
         $client = new Client([
             'headers' => [
+                'content-type' => 'application/json',
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer '.$userToken,
             ],
         ]);
 
-        $response = $client->request('GET','https://doctorapp.devouterbox.com/api/threshold',[
-        //$response = $client->request('GET','http://outerboxpro.com/api/threshold',[
+        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/threshold',[
             'json' => [
                 'causer_id'     => $causer_id,
                 'terminal_id'   => $terminal_id,

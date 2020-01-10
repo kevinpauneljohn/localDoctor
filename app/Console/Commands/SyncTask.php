@@ -96,18 +96,18 @@ class SyncTask extends Command
         $userToken = User::findOrFail($causer_id)->api_token;
         $client = new Client([
             'headers' => [
+                'content-type' => 'application/json',
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer '.$userToken,
             ],
         ]);
 
-        $response = $client->request('GET','https://doctorapp.devouterbox.com/api/threshold',[
-        //$response = $client->request('GET','http://outerboxpro.com/api/threshold',[
+        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/threshold',[
             'json' => [
-                'causer_id' => $causer_id,
+                'causer_id'     => $causer_id,
                 'terminal_id'   => $terminal_id,
-                'data'  => $data,
-                'action'    => $action,
+                'data'          => $data,
+                'action'        => $action,
                 'created_at'    => $created_at,
                 'updated_at'    => $updated_at
             ],

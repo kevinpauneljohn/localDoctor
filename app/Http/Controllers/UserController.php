@@ -101,7 +101,7 @@ class UserController extends Controller
                 $response = $client->request('POST','https://doctorapp.devouterbox.com/api/threshold',[
                     'json' => [
                         'causer_id' => $threshold->causer_id,
-                        'terminal_id'   => config('terminal:license'),
+                        'terminal_id'   => config('terminal.license'),
                         'data'  => $threshold->data,
                         'action'    => $threshold->action,
                         'created_at'    => date('Y-m-d h:i:s', strtotime($threshold->created_at)),
@@ -109,7 +109,7 @@ class UserController extends Controller
                     ],
                 ]);
 
-                return $response->getBody();
+                return json_decode($response->getBody());
             }
 
     }
