@@ -42,13 +42,14 @@ class SyncTask extends Command
     public function handle()
     {
         /*this will check if the connection is good*/
-        $host="outerboxpro.com";
+        $host="doctorapp.devouterbox.com";
 
-        exec("ping -n 4 " . $host, $output, $result);
+        exec("ping -n 2 " . $host, $output, $result);
 
+//        echo $output;
 //        return $result;
         /*will return 0 if there is response from the server*/
-        if($result === 0)
+        if($output[0] === "")
         {
             /*this will retrieve all rows from thresholds table*/
             $thresholds = Threshold::all();
@@ -62,16 +63,16 @@ class SyncTask extends Command
                     date('Y-m-d h:i:s', strtotime($threshold->updated_at))
                 );
 
-                $success = "0";
-                /*will return 1 if the transfer was success*/
-                if($server === 1)
-                {
-                    /*will delete the rows if the data was transferred successfully*/
-                    $thresholdTrash = Threshold::find($threshold->id);
-                    $thresholdTrash->delete();
-                    $success = "1";
-                }
-                echo 'Threshold ID: '.$threshold->id.', Status: '.$success;
+//                $success = "0";
+//                /*will return 1 if the transfer was success*/
+//                if($server === 1)
+//                {
+//                    /*will delete the rows if the data was transferred successfully*/
+//                    $thresholdTrash = Threshold::find($threshold->id);
+//                    $thresholdTrash->delete();
+//                    $success = "1";
+//                }
+//                echo 'Threshold ID: '.$threshold->id.', Status: '.$success;
             }
         }
     }
@@ -100,8 +101,8 @@ class SyncTask extends Command
             ],
         ]);
 
-        //$response = $client->request('POST','https://doctorapp.devouterbox.com/api/userClients',[
-        $response = $client->request('GET','http://outerboxpro.com/api/threshold',[
+        $response = $client->request('GET','https://doctorapp.devouterbox.com/api/threshold',[
+        //$response = $client->request('GET','http://outerboxpro.com/api/threshold',[
             'json' => [
                 'causer_id' => $causer_id,
                 'terminal_id'   => $terminal_id,

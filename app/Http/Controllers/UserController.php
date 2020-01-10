@@ -87,34 +87,30 @@ class UserController extends Controller
 
     public function test()
     {
-        $host="facebook.com";
-
-        exec("ping -n 4 " . $host, $output, $result);
-
-//        return $result;
-
-        if($result === 0)
-        {
             $thresholds = Threshold::all();
-            foreach ($thresholds as $threshold){
-                $server = $this->sendToServer(
-                    $threshold->causer_id,
-                    config('terminal.license'),
-                    $threshold->data,
-                    $threshold->action,
-                    date('Y-m-d h:i:s', strtotime($threshold->created_at)),
-                    date('Y-m-d h:i:s', strtotime($threshold->updated_at))
-                );
-            }
-            if($server === 1)
-            {
-                return 'success';
-            }else{
-                return 'failed';
-            }
-//            return $server;
+            foreach ($thresholds as $threshold) {
+                $userToken = User::findOrFail($threshold->causer_id)->api_token;
+                $client = new Client([
+                    'headers' => [
+                        'content-type' => 'application/json',
+                        'Accept' => 'application/json',
+                        'Authorization' => 'Bearer '.$userToken,
+                    ],
+                ]);
 
-        }
+                $response = $client->request('POST','https://doctorapp.devouterbox.com/api/threshold',[
+                    'json' => [
+                        'causer_id' => $threshold->causer_id,
+                        'terminal_id'   => config('terminal:license'),
+                        'data'  => $threshold->data,
+                        'action'    => $threshold->action,
+                        'created_at'    => date('Y-m-d h:i:s', strtotime($threshold->created_at)),
+                        'updated_at'    => date('Y-m-d h:i:s', strtotime($threshold->updated_at))
+                    ],
+                ]);
+
+                return $response->getBody();
+            }
 
     }
 
@@ -130,8 +126,8 @@ class UserController extends Controller
             ],
         ]);
 
-        //$response = $client->request('POST','https://doctorapp.devouterbox.com/api/userClients',[
-        $response = $client->request('GET','http://outerboxpro.com/api/threshold',[
+        $response = $client->request('GET','https://doctorapp.devouterbox.com/api/threshold',[
+        //$response = $client->request('GET','http://outerboxpro.com/api/threshold',[
             'json' => [
                 'causer_id' => $causer_id,
                 'terminal_id'   => $terminal_id,
@@ -142,7 +138,7 @@ class UserController extends Controller
             ],
         ]);
 
-        //return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
+//        return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
         return json_decode($response->getBody());
     }
 }

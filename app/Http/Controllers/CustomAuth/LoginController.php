@@ -78,8 +78,8 @@ class LoginController extends Controller
             'headers' => ['content-type' => 'application/json', 'Accept' => 'application/json'],
         ]);
 
-        //$response = $client->request('POST','https://doctorapp.devouterbox.com/api/login',[
-        $response = $client->request('POST','http://outerboxpro.com/api/login',[
+        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/login',[
+        //$response = $client->request('POST','http://outerboxpro.com/api/login',[
             'json' => [
                 'username' => $username,
                 'password' => $password,

@@ -38,7 +38,8 @@ class CreateMedicalStaffListener
 
         if($threshold->save())
         {
-            if($this->ping("outerboxpro.com") === 0)
+            //if($this->ping("outerboxpro.com") === 0)
+            if($this->ping("doctorapp.devouterbox.com") === 0)
             {
                 /*this will retrieve all rows from thresholds table*/
                 $thresholds = Threshold::all();
@@ -54,13 +55,13 @@ class CreateMedicalStaffListener
 
                     $success = "0";
                     /*will return 1 if the transfer was success*/
-                    if($server === 1)
-                    {
-                        /*will delete the rows if the data was transferred successfully*/
-                        $thresholdTrash = Threshold::find($threshold->id);
-                        $thresholdTrash->delete();
-                        $success = "1";
-                    }
+//                    if($server === 1)
+//                    {
+//                        /*will delete the rows if the data was transferred successfully*/
+//                        $thresholdTrash = Threshold::find($threshold->id);
+//                        $thresholdTrash->delete();
+//                        $success = "1";
+//                    }
                 }
             }
         }
@@ -76,7 +77,7 @@ class CreateMedicalStaffListener
     public function ping($host)
     {
         /*this will check if the connection is good*/
-        //$host="outerboxpro.com";
+        $host="doctorapp.devouterbox.com";
 
         exec("ping -n 4 " . $host, $output, $result);
         return $result;
@@ -106,13 +107,13 @@ class CreateMedicalStaffListener
             ],
         ]);
 
-        //$response = $client->request('POST','https://doctorapp.devouterbox.com/api/userClients',[
-        $response = $client->request('GET','http://outerboxpro.com/api/threshold',[
+        $response = $client->request('GET','https://doctorapp.devouterbox.com/api/threshold',[
+        //$response = $client->request('GET','http://outerboxpro.com/api/threshold',[
             'json' => [
-                'causer_id' => $causer_id,
+                'causer_id'     => $causer_id,
                 'terminal_id'   => $terminal_id,
-                'data'  => $data,
-                'action'    => $action,
+                'data'          => $data,
+                'action'        => $action,
                 'created_at'    => $created_at,
                 'updated_at'    => $updated_at
             ],
