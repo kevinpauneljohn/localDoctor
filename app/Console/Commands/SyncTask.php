@@ -41,39 +41,29 @@ class SyncTask extends Command
      */
     public function handle()
     {
-        /*this will check if the connection is good*/
-        $host="doctorapp.devouterbox.com";
+        /*this will retrieve all rows from thresholds table*/
+        $thresholds = Threshold::all();
+        foreach ($thresholds as $threshold){
+            $server = $this->sendToServer(
+                $threshold->causer_id,
+                config('terminal.license'),
+                $threshold->data,
+                $threshold->action,
+                date('Y-m-d h:i:s', strtotime($threshold->created_at)),
+                date('Y-m-d h:i:s', strtotime($threshold->updated_at))
+            );
 
-        exec("ping -n 2 " . $host, $output, $result);
-
-//        echo $output;
-//        return $result;
-        /*will return 0 if there is response from the server*/
-        if($output[0] === "")
-        {
-            /*this will retrieve all rows from thresholds table*/
-            $thresholds = Threshold::all();
-            foreach ($thresholds as $threshold){
-                $server = $this->sendToServer(
-                    $threshold->causer_id,
-                    config('terminal.license'),
-                    $threshold->data,
-                    $threshold->action,
-                    date('Y-m-d h:i:s', strtotime($threshold->created_at)),
-                    date('Y-m-d h:i:s', strtotime($threshold->updated_at))
-                );
-
-//                $success = "0";
-//                /*will return 1 if the transfer was success*/
-//                if($server === 1)
-//                {
-//                    /*will delete the rows if the data was transferred successfully*/
-//                    $thresholdTrash = Threshold::find($threshold->id);
-//                    $thresholdTrash->delete();
-//                    $success = "1";
-//                }
-//                echo 'Threshold ID: '.$threshold->id.', Status: '.$success;
+            $success = "0";
+            /*will return 1 if the transfer was success*/
+            if($server === 1)
+            {
+                /*will delete the rows if the data was transferred successfully*/
+//                $thresholdTrash = Threshold::find($threshold->id);
+//                $thresholdTrash->delete();
+                $success = "1";
             }
+            echo 'Threshold ID: '.$threshold->id.', Status: '.$success;
+//            print_r($server);
         }
     }
 

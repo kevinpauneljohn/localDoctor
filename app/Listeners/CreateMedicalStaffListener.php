@@ -52,13 +52,13 @@ class CreateMedicalStaffListener
 
                 $success = "0";
                 /*will return 1 if the transfer was success*/
-//                    if($server === 1)
-//                    {
-//                        /*will delete the rows if the data was transferred successfully*/
-//                        $thresholdTrash = Threshold::find($threshold->id);
-//                        $thresholdTrash->delete();
-//                        $success = "1";
-//                    }
+                    if($server === 1)
+                    {
+                        /*will delete the rows if the data was transferred successfully*/
+                        $thresholdTrash = Threshold::find($threshold->id);
+                        $thresholdTrash->delete();
+                        $success = "1";
+                    }
             }
         }
     }
