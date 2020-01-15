@@ -56,14 +56,15 @@ class ClinicCreatedlistener
                 ],
             ]);
 
-            //return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
-//            return $response->getBody();
+            return 1;
         }else{
             $threshold = new Threshold();
             $threshold->causer_id = auth()->user()->id;
+            $threshold->table = 'clinics';
             $threshold->data = $event->clinic;
-            $threshold->action = "created clinic";
+            $threshold->action = "created";
             $threshold->save();
+            return 0;
         }
     }
 }

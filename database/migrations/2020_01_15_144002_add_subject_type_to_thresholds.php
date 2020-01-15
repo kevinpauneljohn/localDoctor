@@ -14,7 +14,7 @@ class AddSubjectTypeToThresholds extends Migration
     public function up()
     {
         Schema::table('thresholds', function (Blueprint $table) {
-            $table->string('subject_type')->after('causer_id')->nullable();
+            $table->string('table')->after('causer_id')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddSubjectTypeToThresholds extends Migration
     public function down()
     {
         Schema::table('thresholds', function (Blueprint $table) {
-            $table->dropColumn('subject_type');
+            $table->dropColumn('table');
         });
     }
 }
