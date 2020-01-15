@@ -58,9 +58,9 @@ $(document).ready(function(){
             'POST',
             addForm.serialize() ,
             'New Clinic Successfully Created!',
-            false,
+            true,
             '',
-            true
+            false
         );
         clear_errors("name","landline","mobileNo","address","state","city");
     });
