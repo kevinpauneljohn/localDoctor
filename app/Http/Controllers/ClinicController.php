@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Clinic;
+use App\Events\ClinicCreatedEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -92,6 +93,7 @@ class ClinicController extends Controller
 
             if($clinic->save())
             {
+                event(new ClinicCreatedEvent($clinic));
                 $response = true;
             }
 
