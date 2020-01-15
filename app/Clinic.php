@@ -15,9 +15,9 @@ class Clinic extends Model
 
     protected $guarded = [];
 
-    protected $dispatchesEvents = [
-        'created'   => ClinicCreatedEvent::class
-    ];
+//    protected $dispatchesEvents = [
+//        'created'   => ClinicCreatedEvent::class
+//    ];
 
     public function users()
     {

@@ -26,6 +26,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\CreateMedicalStaffEvent' => [
             'App\Listeners\CreateMedicalStaffListener',
         ],
+        'App\Events\ClinicCreatedEvent' => [
+            'App\Listeners\ClinicCreatedListener',
+        ],
     ];
 
     /**

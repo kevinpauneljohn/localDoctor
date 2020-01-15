@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Threshold;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -29,7 +30,7 @@ class ClinicCreatedlistener
     public function handle(ClinicCreatedEvent $event)
     {
         //no internet connection or the server is not online
-        if(!$sock = @fsockopen('doctorapp.devouterbox.com', 80))
+        if($sock = @fsockopen('doctorapp.devouterbox.com', 80))
         {
             $client = new Client([
                 'headers' => [
@@ -48,7 +49,7 @@ class ClinicCreatedlistener
                     'city'       => $event->clinic->city,
                     'landline'   => $event->clinic->landline,
                     'mobile'     => $event->clinic->mobile,
-                    'user_id'    => auth()->user()->id,
+                    'user_id'    => $event->clinic->user_id,
                     'status'     => $event->clinic->status,
                     'created_at' => date('Y-m-d h:i:s', strtotime($event->clinic->created_at)),
                     'updated_at' => date('Y-m-d h:i:s', strtotime($event->clinic->updated_at)),
@@ -58,7 +59,11 @@ class ClinicCreatedlistener
             //return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
 //            return $response->getBody();
         }else{
-
+            $threshold = new Threshold();
+            $threshold->causer_id = auth()->user()->id;
+            $threshold->data = $event->clinic;
+            $threshold->action = "created clinic";
+            $threshold->save();
         }
     }
 }

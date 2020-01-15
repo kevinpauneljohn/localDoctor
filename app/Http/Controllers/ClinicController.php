@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Clinic;
 use App\Events\ClinicCreatedEvent;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -93,11 +94,37 @@ class ClinicController extends Controller
 
             if($clinic->save())
             {
-                event(new ClinicCreatedEvent($clinic));
+
+//                $client = new Client([
+//                    'headers' => [
+//                        'content-type' => 'application/json',
+//                        'Accept' => 'application/json',
+//                        'Authorization' => 'Bearer '.auth()->user()->api_token,
+//                    ],
+//                ]);
+//
+//                $response = $client->request('POST','https://doctorapp.devouterbox.com/api/create-clinic',[
+//                    'json' => [
+//                        'id'         => $clinic->id,
+//                        'name'       => $clinic->name,
+//                        'address'    => $clinic->address,
+//                        'state'      => $clinic->state,
+//                        'city'       => $clinic->city,
+//                        'landline'   => $clinic->landline,
+//                        'mobile'     => $clinic->mobile,
+//                        'user_id'    => $clinic->user_id,
+//                        'status'     => $clinic->status,
+//                        'created_at' => date('Y-m-d h:i:s', strtotime($clinic->created_at)),
+//                        'updated_at' => date('Y-m-d h:i:s', strtotime($clinic->updated_at)),
+//                    ],
+//                ]);
+
+                //return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
+                //return $response->getBody();
                 $response = true;
             }
 
-            return response()->json(['success' => $response]);
+            return response()->json(['success' => $response, 'body' => event(new ClinicCreatedEvent($clinic))]);
         }
         return response()->json($validator->errors());
 
