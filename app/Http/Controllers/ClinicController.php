@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Clinic;
 use App\Events\ClinicCreatedEvent;
+use App\Threshold;
+use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -94,37 +96,11 @@ class ClinicController extends Controller
 
             if($clinic->save())
             {
-
-//                $client = new Client([
-//                    'headers' => [
-//                        'content-type' => 'application/json',
-//                        'Accept' => 'application/json',
-//                        'Authorization' => 'Bearer '.auth()->user()->api_token,
-//                    ],
-//                ]);
-//
-//                $response = $client->request('POST','https://doctorapp.devouterbox.com/api/create-clinic',[
-//                    'json' => [
-//                        'id'         => $clinic->id,
-//                        'name'       => $clinic->name,
-//                        'address'    => $clinic->address,
-//                        'state'      => $clinic->state,
-//                        'city'       => $clinic->city,
-//                        'landline'   => $clinic->landline,
-//                        'mobile'     => $clinic->mobile,
-//                        'user_id'    => $clinic->user_id,
-//                        'status'     => $clinic->status,
-//                        'created_at' => date('Y-m-d h:i:s', strtotime($clinic->created_at)),
-//                        'updated_at' => date('Y-m-d h:i:s', strtotime($clinic->updated_at)),
-//                    ],
-//                ]);
-
-                //return response()->json(['success' => true,'body' => json_decode($response->getBody())]);
-                //return $response->getBody();
+                event(new ClinicCreatedEvent($clinic));
                 $response = true;
             }
 
-            return response()->json(['success' => $response, 'body' => event(new ClinicCreatedEvent($clinic))]);
+            return response()->json(['success' => $response]);
         }
         return response()->json($validator->errors());
 
@@ -187,5 +163,89 @@ class ClinicController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Jan. 16, 2020
+     * @author john kevin sync the data from thresholds table to server
+     * */
+    public function syncToServer()
+    {
+        $thresholds = Threshold::where('table','clinics');
+
+        //there'a a data saved in the threshold
+        if($thresholds->count() > 0)
+        {
+            //no internet connection or the server is not online
+            if($sock = @fsockopen('doctorapp.devouterbox.com', 80))
+            {
+                foreach ($thresholds->get() as $threshold)
+                {
+                    $clinic = json_decode($threshold->data);
+
+                    $this->apiAuthorization(
+                        User::findOrFail($clinic->user_id)->api_token,
+                        $clinic->id,
+                        $clinic->name,
+                        $clinic->address,
+                        $clinic->state,
+                        $clinic->city,
+                        $clinic->landline,
+                        $clinic->mobile,
+                        $clinic->user_id,
+                        $clinic->status,
+                        $clinic->created_at,
+                        $clinic->updated_at
+                    );
+                }
+
+                return response()->json(['success' => true]);
+            }
+        }
+
+    }
+
+    /**
+     * Jan. 16. 2020
+     * @author john kevin paunel
+     * send data to server with api authorization
+     * @param string $api_token
+     * @param string $id
+     * @param string $name
+     * @param string $address
+     * @param string $state
+     * @param string $city
+     * @param string $landline
+     * @param string $mobile
+     * @param string $user_id
+     * @param string $status
+     * @param string $created_at
+     * @param string $updated_at
+     * */
+    public function apiAuthorization($api_token , $id , $name, $address , $state, $city, $landline, $mobile, $user_id, $status, $created_at, $updated_at)
+    {
+        $client = new Client([
+            'headers' => [
+                'content-type' => 'application/json',
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.$api_token,
+            ],
+        ]);
+
+        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/create-clinic',[
+            'json' => [
+                'id'         => $id,
+                'name'       => $name,
+                'address'    => $address,
+                'state'      => $state,
+                'city'       => $city,
+                'landline'   => $landline,
+                'mobile'     => $mobile,
+                'user_id'    => $user_id,
+                'status'     => $status,
+                'created_at' => date('Y-m-d h:i:s', strtotime($created_at)),
+                'updated_at' => date('Y-m-d h:i:s', strtotime($updated_at)),
+            ],
+        ]);
     }
 }

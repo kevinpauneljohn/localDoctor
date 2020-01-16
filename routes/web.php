@@ -69,6 +69,7 @@ Route::put('/clinics/{clinic}','ClinicController@update')->name('clinics.update'
 Route::delete('/clinics/{clinic}','ClinicController@destroy')->name('clinics.destroy')->middleware(['auth','permission:delete clinic']);
 Route::get('/clinics/{clinic}','ClinicController@show')->name('clinics.show')->middleware(['auth','permission:view clinic']);
 Route::get('/clinic-list','ClinicController@clinicList')->name('clinics.list')->middleware(['auth','permission:view clinic']);
+Route::get('/sync-clinic','ClinicController@syncToServer')->name('sync.clinic')->middleware(['auth','permission:add clinic']);
 /*end of clinics*/
 
 Route::group(['middleware' => ['auth','permission:view role']],function (){
