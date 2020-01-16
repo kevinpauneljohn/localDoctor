@@ -374,6 +374,17 @@ return [
                 ],
             ],
         ],
+        [
+            'name' => 'Threshold',
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'js/threshold.js',
+                ],
+            ],
+        ],
     ],
 
 ];
