@@ -2,7 +2,7 @@ $(document).ready(function () {
     let x = 1;
     setInterval(function(){
         //this.sendToServer();
-    },60000);
+    },5000);
 });
 
 function sendToServer()

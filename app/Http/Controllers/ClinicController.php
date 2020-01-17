@@ -183,7 +183,7 @@ class ClinicController extends Controller
                 {
                     $clinic = json_decode($threshold->data);
 
-                    $this->apiAuthorization(
+                    $body = $this->apiAuthorization(
                         User::findOrFail($clinic->user_id)->api_token,
                         $clinic->id,
                         $clinic->name,
@@ -198,12 +198,16 @@ class ClinicController extends Controller
                         $clinic->updated_at,
                         'created'
                     );
-                }
 
-                return response()->json(['success' => true]);
+                    if($body === 1)
+                    {
+                        $this->deleteThreshold($threshold);
+                    }
+                }
+            }else{
+                //no internet connection or the server is not online
+                return response()->json(['message' => 'no internet connection']);
             }
-            //no internet connection or the server is not online
-            return response()->json(['message' => 'no internet connection']);
         }
 
     }
@@ -225,6 +229,7 @@ class ClinicController extends Controller
      * @param string $created_at
      * @param string $updated_at
      * @param string $action
+     * @return mixed
      * */
     public function apiAuthorization($api_token , $id , $name, $address , $state, $city, $landline, $mobile, $user_id, $status, $created_at, $updated_at, $action)
     {
@@ -253,5 +258,20 @@ class ClinicController extends Controller
                 'action'        => $action,
             ],
         ]);
+
+        return json_decode($response->getBody());
+    }
+
+    /**
+     * Jan. 17, 2020
+     * @author john kevin paunel
+     * Delete threshold from local DB
+     * @return int
+     * */
+    public function deleteThreshold($threshold)
+    {
+        $threshold = Threshold::find($threshold->id);
+        $threshold->delete();
+        return 1;
     }
 }
