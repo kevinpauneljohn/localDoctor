@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Clinic;
 use App\Events\ClinicCreatedEvent;
+use App\Events\ClinicDeletedEvent;
 use App\Events\ClinicUpdatedEvent;
 use App\Threshold;
 use App\User;
@@ -217,7 +218,7 @@ class ClinicController extends Controller
     {
         $clinic = Clinic::findOrFail($id);
         $clinic->delete();
-
+        event(new ClinicDeletedEvent($id));
         return response()->json(['success' => true]);
     }
 
@@ -297,7 +298,20 @@ class ClinicController extends Controller
             ],
         ]);
 
-        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/edit-clinic',[
+        $endpoint = "";
+        if($action === "created")
+        {
+            $endpoint = "/api/create-clinic";
+        }elseif ($action === "updated")
+        {
+            $endpoint = "/api/edit-clinic";
+        }
+        elseif ($action === "deleted")
+        {
+            $endpoint = "/api/delete-clinic";
+        }
+
+        $response = $client->request('POST','https://doctorapp.devouterbox.com'.$endpoint,[
             'json' => [
                 'id'            => $id,
                 'name'          => $name,

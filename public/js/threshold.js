@@ -1,8 +1,8 @@
 $(document).ready(function () {
     let x = 1;
     setInterval(function(){
-        //this.sendToServer();
-    },5000);
+        this.sendToServer();
+    },30000);
 });
 
 function sendToServer()
@@ -12,7 +12,7 @@ function sendToServer()
         'type' : 'GET',
         'cache' : true,
         success: function (result) {
-            console.log(result);
+            //console.log(result);
         }
     });
 }

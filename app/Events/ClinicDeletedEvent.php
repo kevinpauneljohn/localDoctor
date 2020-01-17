@@ -13,15 +13,15 @@ use Illuminate\Queue\SerializesModels;
 class ClinicDeletedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    public $clinic_id;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($clinic_id)
     {
-        //
+        $this->clinic_id = $clinic_id;
     }
 
     /**
