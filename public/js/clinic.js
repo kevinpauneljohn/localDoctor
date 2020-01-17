@@ -75,10 +75,10 @@ $(document).ready(function(){
             '/clinics/'+id,
             'POST',
             editForm.serialize() ,
-            'New Clinic Successfully Created!',
-            false,
+            'Clinic Successfully Updated!',
+            true,
             '',
-            true
+            false
         );
         clear_errors("edit_name","edit_landline","edit_mobileNo","edit_address","edit_state","edit_city");
     });
@@ -112,6 +112,48 @@ $(document).on('click','.edit-btn',function(){
                 }
                 $('#edit_city').append('<option value="'+value.citymunCode+'"'+selected+'>'+value.citymunDesc+'</option>');
             });
+        },error: function(xhr, status, error){
+            console.log(xhr);
+        }
+    });
+});
+
+$(document).on('click','.delete-btn',function () {
+    let id = this.id;
+
+    $.ajax({
+        'url' : '/clinics/'+id,
+        'type' : 'GET',
+        'cache' : false,
+        success: function (result) {
+            $('#deleteClinicId').val(id);
+            $('.clinic-name').text(result.name);
+        },error: function(xhr, status, error){
+            console.log(xhr);
+        }
+    });
+});
+
+$(document).on('submit','#delete-clinic-form',function (form) {
+    form.preventDefault();
+
+    let data = $('#delete-clinic-form');
+    let id = $('#deleteClinicId').val();
+    $.ajax({
+        'url' : '/clinics/'+id,
+        'type' : 'POST',
+        'data' : data.serialize(),
+        'cache' : false,
+        success: function (result) {
+            if(result.success === true)
+            {
+                setTimeout(function(){
+                    toastr.success("Clinic Successfully Deleted")
+                    setTimeout(function(){
+                            location.reload();
+                    },1500);
+                });
+            }
         },error: function(xhr, status, error){
             console.log(xhr);
         }

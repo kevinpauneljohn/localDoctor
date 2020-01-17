@@ -51,7 +51,7 @@ class ClinicController extends Controller
                 }
                 if(auth()->user()->hasPermissionTo('delete clinic'))
                 {
-                    $action .= '<a href="#" class="btn btn-xs btn-danger delete-btn" data-toggle="modal" data-target="#delete-job-order" id="job-order-'.$clinic->id.'"><i class="fa fa-trash"></i> Delete</a>';
+                    $action .= '<a href="#" class="btn btn-xs btn-danger delete-btn" data-toggle="modal" data-target="#delete-clinic-modal" id="'.$clinic->id.'"><i class="fa fa-trash"></i> Delete</a>';
                 }
                 return $action;
             })
@@ -215,7 +215,10 @@ class ClinicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $clinic = Clinic::findOrFail($id);
+        $clinic->delete();
+
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -249,7 +252,7 @@ class ClinicController extends Controller
                         $clinic->status,
                         $clinic->created_at,
                         $clinic->updated_at,
-                        'created'
+                        $threshold->action
                     );
 
                     if($body === 1)
@@ -294,7 +297,7 @@ class ClinicController extends Controller
             ],
         ]);
 
-        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/create-clinic',[
+        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/edit-clinic',[
             'json' => [
                 'id'            => $id,
                 'name'          => $name,

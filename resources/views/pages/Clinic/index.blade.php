@@ -178,6 +178,31 @@
         </div>
         <!--end edit clinic modal-->
     @endcan
+
+    @can('delete clinic')
+        <!--delete terminal-->
+        <div class="modal fade" id="delete-clinic-modal">
+            <form role="form" id="delete-clinic-form">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="deleteClinicId" id="deleteClinicId">
+                <div class="modal-dialog">
+                    <div class="modal-content bg-danger">
+                        <div class="modal-body">
+                            <p class="delete_clinic">Delete Clinic: <span class="clinic-name"></span></p>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-outline-light">Delete</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </form>
+        </div>
+        <!--end delete terminal modal-->
+    @endcan
 @stop
 
 @section('css')

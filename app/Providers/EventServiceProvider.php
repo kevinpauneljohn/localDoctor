@@ -31,6 +31,8 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\ClinicUpdatedEvent' => [
             'App\Listeners\ClinicUpdatedListener',
+        ],'App\Events\ClinicDeletedEvent' => [
+            'App\Listeners\ClinicDeletedListener',
         ],
     ];
 
