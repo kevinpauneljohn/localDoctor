@@ -16,6 +16,11 @@ use Yajra\DataTables\DataTables;
 class ClinicController extends Controller
 {
     /**
+     * this variable will be used for getting the clinic ID
+     * @var $id
+     * */
+    public $id;
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -152,13 +157,30 @@ class ClinicController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->id = $id;
         $validator = Validator::make($request->all(), [
-            'edit_name'        => 'required',
-            'edit_address'     => 'required',
-            'edit_state'       => 'required',
-            'edit_city'        => 'required',
-            'edit_landline'    => 'required',
-            'edit_mobileNo'    => 'required',
+            'edit_name'        => ['required',
+                function($attribute, $value, $fail){
+                    $clinic = Clinic::where('id','!=',$this->id)
+                        ->where('name','=',$value)->count();
+
+                    if($clinic === 1)
+                    {
+                        $fail($attribute.' already taken');
+                    }
+                }],
+            'edit_address'     => ['required'],
+            'edit_state'       => ['required'],
+            'edit_city'        => ['required'],
+            'edit_landline'    => ['required'],
+            'edit_mobileNo'    => ['required'],
+        ],[
+            'edit_name.required'        => 'Clinic name is required',
+            'edit_address.required'     => 'Address is required',
+            'edit_state.required'       => 'State is required',
+            'edit_city.required'        => 'City is required',
+            'edit_landline.required'    => 'Landline is required',
+            'edit_mobileNo.required'    => 'Mobile No. is required',
         ]);
 
         if($validator->passes())
@@ -169,7 +191,7 @@ class ClinicController extends Controller
             $clinic->state = $request->edit_state;
             $clinic->city = $request->edit_city;
             $clinic->landline = $request->edit_landline;
-            $clinic->mobiile = $request->edit_mobileNo;
+            $clinic->mobile = $request->edit_mobileNo;
             $clinic->user_id = auth()->user()->id;
             $clinic->status = "active";
 
