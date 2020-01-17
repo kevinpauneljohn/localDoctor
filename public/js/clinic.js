@@ -50,6 +50,7 @@ function submitform(url , type , data , message , reload = true, elementAttr, co
 }
 $(document).ready(function(){
     let addForm = $('#clinic-form');
+    let editForm = $('#edit-clinic-form');
 
     addForm.submit(function(form){
         form.preventDefault();
@@ -64,7 +65,27 @@ $(document).ready(function(){
         );
         clear_errors("name","landline","mobileNo","address","state","city");
     });
+
+    /*update clinic details*/
+    editForm.submit(function (form) {
+        form.preventDefault();
+
+        let id = $('#edit-clinic-form #id').val();
+        submitform(
+            '/clinics/'+id,
+            'POST',
+            editForm.serialize() ,
+            'New Clinic Successfully Created!',
+            false,
+            '',
+            true
+        );
+        clear_errors("edit_name","edit_landline","edit_mobileNo","edit_address","edit_state","edit_city");
+    });
 });
+
+
+
 
 $(document).on('click','.edit-btn',function(){
     let id = this.id;

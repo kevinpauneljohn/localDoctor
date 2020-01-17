@@ -152,7 +152,35 @@ class ClinicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'edit_name'        => 'required',
+            'edit_address'     => 'required',
+            'edit_state'       => 'required',
+            'edit_city'        => 'required',
+            'edit_landline'    => 'required',
+            'edit_mobileNo'    => 'required',
+        ]);
+
+        if($validator->passes())
+        {
+            $clinic = Clinic::find($id);
+            $clinic->name = $request->edit_name;
+            $clinic->address = $request->edit_address;
+            $clinic->state = $request->edit_state;
+            $clinic->city = $request->edit_city;
+            $clinic->landline = $request->edit_landline;
+            $clinic->mobiile = $request->edit_mobileNo;
+            $clinic->user_id = auth()->user()->id;
+            $clinic->status = "active";
+
+            if($clinic->save())
+            {
+                return response()->json(['success' => true]);
+            }
+            return response()->json(['success' => false]);
+        }
+
+        return response()->json($validator->errors());
     }
 
     /**
@@ -168,7 +196,8 @@ class ClinicController extends Controller
 
     /**
      * Jan. 16, 2020
-     * @author john kevin sync the data from thresholds table to server
+     * @author john kevin
+     * sync the data from thresholds table to server
      * */
     public function syncToServer()
     {
