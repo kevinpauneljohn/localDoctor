@@ -1,6 +1,18 @@
 $(document).ready(function () {
     let x = 1;
     setInterval(function(){
-        // console.log(x++);
-    },15000);
+        //this.sendToServer();
+    },60000);
 });
+
+function sendToServer()
+{
+    $.ajax({
+        'url' : '/sync-clinic',
+        'type' : 'GET',
+        'cache' : true,
+        success: function (result) {
+            console.log(result);
+        }
+    });
+}

@@ -7,6 +7,7 @@ use App\Events\ClinicCreatedEvent;
 use App\Threshold;
 use App\User;
 use GuzzleHttp\Client;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -176,7 +177,6 @@ class ClinicController extends Controller
         //there'a a data saved in the threshold
         if($thresholds->count() > 0)
         {
-            //no internet connection or the server is not online
             if($sock = @fsockopen('doctorapp.devouterbox.com', 80))
             {
                 foreach ($thresholds->get() as $threshold)
@@ -195,12 +195,15 @@ class ClinicController extends Controller
                         $clinic->user_id,
                         $clinic->status,
                         $clinic->created_at,
-                        $clinic->updated_at
+                        $clinic->updated_at,
+                        'created'
                     );
                 }
 
                 return response()->json(['success' => true]);
             }
+            //no internet connection or the server is not online
+            return response()->json(['message' => 'no internet connection']);
         }
 
     }
@@ -221,8 +224,9 @@ class ClinicController extends Controller
      * @param string $status
      * @param string $created_at
      * @param string $updated_at
+     * @param string $action
      * */
-    public function apiAuthorization($api_token , $id , $name, $address , $state, $city, $landline, $mobile, $user_id, $status, $created_at, $updated_at)
+    public function apiAuthorization($api_token , $id , $name, $address , $state, $city, $landline, $mobile, $user_id, $status, $created_at, $updated_at, $action)
     {
         $client = new Client([
             'headers' => [
@@ -234,17 +238,19 @@ class ClinicController extends Controller
 
         $response = $client->request('POST','https://doctorapp.devouterbox.com/api/create-clinic',[
             'json' => [
-                'id'         => $id,
-                'name'       => $name,
-                'address'    => $address,
-                'state'      => $state,
-                'city'       => $city,
-                'landline'   => $landline,
-                'mobile'     => $mobile,
-                'user_id'    => $user_id,
-                'status'     => $status,
-                'created_at' => date('Y-m-d h:i:s', strtotime($created_at)),
-                'updated_at' => date('Y-m-d h:i:s', strtotime($updated_at)),
+                'id'            => $id,
+                'name'          => $name,
+                'address'       => $address,
+                'state'         => $state,
+                'city'          => $city,
+                'landline'      => $landline,
+                'mobile'        => $mobile,
+                'user_id'       => $user_id,
+                'status'        => $status,
+                'created_at'    => date('Y-m-d h:i:s', strtotime($created_at)),
+                'updated_at'    => date('Y-m-d h:i:s', strtotime($updated_at)),
+                'terminal_id'   => config('terminal.license'),
+                'action'        => $action,
             ],
         ]);
     }
