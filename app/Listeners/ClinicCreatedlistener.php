@@ -53,6 +53,8 @@ class ClinicCreatedlistener
                     'status'     => $event->clinic->status,
                     'created_at' => date('Y-m-d h:i:s', strtotime($event->clinic->created_at)),
                     'updated_at' => date('Y-m-d h:i:s', strtotime($event->clinic->updated_at)),
+                    'terminal_id' => config('terminal.license'),
+                    'action'    => 'created'
                 ],
             ]);
 

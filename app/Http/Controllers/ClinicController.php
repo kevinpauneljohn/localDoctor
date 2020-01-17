@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Clinic;
 use App\Events\ClinicCreatedEvent;
+use App\Events\ClinicUpdatedEvent;
 use App\Threshold;
 use App\User;
 use GuzzleHttp\Client;
@@ -197,6 +198,7 @@ class ClinicController extends Controller
 
             if($clinic->save())
             {
+                event(new ClinicUpdatedEvent($clinic));
                 return response()->json(['success' => true]);
             }
             return response()->json(['success' => false]);

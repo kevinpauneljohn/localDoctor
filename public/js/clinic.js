@@ -96,7 +96,7 @@ $(document).on('click','.edit-btn',function(){
         'type' : 'GET',
         'cache' : false,
         success: function(result){
-            console.log(result.name);
+
             $('#id').val(result.id);
             $('#edit_name').val(result.name);
             $('#edit_landline').val(result.landline);
