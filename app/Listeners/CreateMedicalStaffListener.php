@@ -63,35 +63,35 @@ class CreateMedicalStaffListener
 //        }
 
         $medicalStaff = $obj->merge($event->clinics);
-//        $client = new Client([
-//            'headers' => [
-//                'content-type' => 'application/json',
-//                'Accept' => 'application/json',
-//                'Authorization' => 'Bearer '.auth()->user()->api_token,
-//            ],
-//        ]);
-//
-//        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/create-clinic',[
-//            'json' => [
-//                'id'         => $event->clinics->id,
-//                'name'       => $event->clinics->name,
-//                'address'    => $event->clinics->address,
-//                'state'      => $event->clinics->state,
-//                'city'       => $event->clinics->city,
-//                'landline'   => $event->clinics->landline,
-//                'mobile'     => $event->clinics->mobile,
-//                'user_id'    => $event->clinics->user_id,
-//                'status'     => $event->clinics->status,
-//                'created_at' => date('Y-m-d h:i:s', strtotime($event->clinic->created_at)),
-//                'updated_at' => date('Y-m-d h:i:s', strtotime($event->clinic->updated_at)),
-//                'terminal_id' => config('terminal.license'),
-//                'action'    => 'created'
-//            ],
-//        ]);
+        $client = new Client([
+            'headers' => [
+                'content-type' => 'application/json',
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.auth()->user()->api_token,
+            ],
+        ]);
+
+        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/create-medical-staff',[
+            'json' => [
+                'id'         => $medicalStaff['id'],
+                'firstname'       => $medicalStaff['firstname'],
+                'middlename'    => $medicalStaff['middlename'],
+                'lastname'      => $medicalStaff['lastname'],
+                'mobileNo'       => $medicalStaff['mobileNo'],
+                'address'   => $medicalStaff['address'],
+                'refprovince'     => $medicalStaff['refprovince'],
+                'refcitymun'    => $medicalStaff['refcitymun'],
+                'status'     => $medicalStaff['status'],
+                'created_at' => date('Y-m-d h:i:s', strtotime($medicalStaff['created_at'])),
+                'updated_at' => date('Y-m-d h:i:s', strtotime($medicalStaff['updated_at'])),
+                'terminal_id' => config('terminal.license'),
+                'action'    => 'created'
+            ],
+        ]);
 
         ///return 1;
-//        return json_decode($response->getBody());
-        return $medicalStaff->clinic_id;
+        return json_decode($response->getBody());
+//        return $medicalStaff['clinic_id'];
     }
 
     /**
