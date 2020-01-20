@@ -31,52 +31,67 @@ class CreateMedicalStaffListener
     public function handle(CreateMedicalStaffEvent $event)
     {
         $obj = new Collection($event->medicalStaff);
-        $threshold = new Threshold();
-        $threshold->causer_id = auth()->user()->id;
-        $threshold->data = $obj->merge($event->clinics);
-        $threshold->action = "created medical staff";
+//        $threshold = new Threshold();
+//        $threshold->causer_id = auth()->user()->id;
+//        $threshold->data = $obj->merge($event->clinics);
+//        $threshold->action = "created medical staff";
+//
+//        if($threshold->save())
+//        {
+//            /*this will retrieve all rows from thresholds table*/
+//            $thresholds = Threshold::all();
+//            foreach ($thresholds as $threshold){
+//                $server = $this->sendToServer(
+//                    $threshold->causer_id,
+//                    config('terminal.license'),
+//                    $threshold->data,
+//                    $threshold->action,
+//                    date('Y-m-d h:i:s', strtotime($threshold->created_at)),
+//                    date('Y-m-d h:i:s', strtotime($threshold->updated_at))
+//                );
+//
+//                $success = "0";
+//                /*will return 1 if the transfer was success*/
+//                    if($server === 1)
+//                    {
+//                        /*will delete the rows if the data was transferred successfully*/
+//                        $thresholdTrash = Threshold::find($threshold->id);
+//                        $thresholdTrash->delete();
+//                        $success = "1";
+//                    }
+//            }
+//        }
 
-        if($threshold->save())
-        {
-            /*this will retrieve all rows from thresholds table*/
-            $thresholds = Threshold::all();
-            foreach ($thresholds as $threshold){
-                $server = $this->sendToServer(
-                    $threshold->causer_id,
-                    config('terminal.license'),
-                    $threshold->data,
-                    $threshold->action,
-                    date('Y-m-d h:i:s', strtotime($threshold->created_at)),
-                    date('Y-m-d h:i:s', strtotime($threshold->updated_at))
-                );
+        $medicalStaff = $obj->merge($event->clinics);
+//        $client = new Client([
+//            'headers' => [
+//                'content-type' => 'application/json',
+//                'Accept' => 'application/json',
+//                'Authorization' => 'Bearer '.auth()->user()->api_token,
+//            ],
+//        ]);
+//
+//        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/create-clinic',[
+//            'json' => [
+//                'id'         => $event->clinics->id,
+//                'name'       => $event->clinics->name,
+//                'address'    => $event->clinics->address,
+//                'state'      => $event->clinics->state,
+//                'city'       => $event->clinics->city,
+//                'landline'   => $event->clinics->landline,
+//                'mobile'     => $event->clinics->mobile,
+//                'user_id'    => $event->clinics->user_id,
+//                'status'     => $event->clinics->status,
+//                'created_at' => date('Y-m-d h:i:s', strtotime($event->clinic->created_at)),
+//                'updated_at' => date('Y-m-d h:i:s', strtotime($event->clinic->updated_at)),
+//                'terminal_id' => config('terminal.license'),
+//                'action'    => 'created'
+//            ],
+//        ]);
 
-                $success = "0";
-                /*will return 1 if the transfer was success*/
-                    if($server === 1)
-                    {
-                        /*will delete the rows if the data was transferred successfully*/
-                        $thresholdTrash = Threshold::find($threshold->id);
-                        $thresholdTrash->delete();
-                        $success = "1";
-                    }
-            }
-        }
-    }
-
-    /**
-     * Jan. 08, 2020
-     * @author john kevin paunel
-     * check the internet connection and status of the server
-     * @param string $host
-     * @return string
-     * */
-    public function ping($host)
-    {
-        /*this will check if the connection is good*/
-        $host="doctorapp.devouterbox.com";
-
-        exec("ping -n 4 " . $host, $output, $result);
-        return $result;
+        ///return 1;
+//        return json_decode($response->getBody());
+        return $medicalStaff->clinic_id;
     }
 
     /**

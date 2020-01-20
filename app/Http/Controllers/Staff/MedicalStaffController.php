@@ -107,35 +107,77 @@ class MedicalStaffController extends Controller
         if($validator->passes())
         {
             $medical_staff = new User();
-            $medical_staff->firstname = $request->firstname;
-            $medical_staff->middlename = $request->middlename;
-            $medical_staff->lastname = $request->lastname;
-            $medical_staff->mobileNo = $request->mobileNo;
-            $medical_staff->address = $request->address;
-            $medical_staff->refprovince = $request->province;
-            $medical_staff->refcitymun = $request->city;
-            $medical_staff->status = 'offline';
-            $medical_staff->category = 'client';
-            //default role for medical staffs
-            $medical_staff->assignRole('medical staff');
-            foreach ($request->position as $role)
+            if($this->staff($medical_staff, $request)->role($medical_staff, $request))
             {
-                $medical_staff->assignRole($role);
-            }
+                $clinicMember = $this->clinic($medical_staff,$request);
 
-            if($medical_staff->save())
-            {
-                $clinicMember = new ClinicUser();
-                $clinicMember->clinic_id = $request->clinic;
-                $clinicMember->user_id = $medical_staff->id;
-                $clinicMember->save();
-
-                event(new CreateMedicalStaffEvent($medical_staff, $clinicMember));
-                return response()->json(['success' => true]);
+                /*pass the data to server*/
+                $evenValue = event(new CreateMedicalStaffEvent($medical_staff, $clinicMember));
+                return response()->json(['success' => true,'body' => $evenValue]);
             }
         }
 
         return response()->json($validator->errors());
+    }
+
+    /**
+     * Jan. 18, 2020
+     * @author john kevin paunel
+     * create new medical staff
+     * @param object $medical_staff
+     * @param Request $request
+     * @return mixed
+     * */
+    public function staff($medical_staff, $request)
+    {
+        $medical_staff->firstname = $request->firstname;
+        $medical_staff->middlename = $request->middlename;
+        $medical_staff->lastname = $request->lastname;
+        $medical_staff->mobileNo = $request->mobileNo;
+        $medical_staff->address = $request->address;
+        $medical_staff->refprovince = $request->province;
+        $medical_staff->refcitymun = $request->city;
+        $medical_staff->status = 'offline';
+        $medical_staff->category = 'client';
+        //default role for medical staffs
+        $medical_staff->assignRole('medical staff');
+        $medical_staff->save();
+        return $this;
+    }
+    /**
+     * Jan. 18, 2020
+     * @author john kevin paunel
+     * add role to medical staff
+     * @param object $medical_staff
+     * @param Request $request
+     * @return mixed
+     * */
+    public function role($medical_staff, $request)
+    {
+        foreach ($request->position as $role)
+        {
+            $medical_staff->assignRole($role);
+        }
+        return $this;
+    }
+
+    /**
+     * Jan. 18, 2020
+     * @author john kevin paunel
+     * join the medical staff to a specific clinic
+     * save the users to clinic_users table
+     * @param object $medical_staff
+     * @param Request $request
+     * @return mixed
+     * */
+    public function clinic($medical_staff,$request)
+    {
+        $clinicMember = new ClinicUser();
+        $clinicMember->clinic_id = $request->clinic;
+        $clinicMember->user_id = $medical_staff->id;
+        $clinicMember->save();
+
+        return $clinicMember;
     }
 
     /**
