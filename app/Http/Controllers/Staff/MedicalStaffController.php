@@ -112,8 +112,8 @@ class MedicalStaffController extends Controller
                 $clinicMember = $this->clinic($medical_staff,$request);
 
                 /*pass the data to server*/
-                $evenValue = event(new CreateMedicalStaffEvent($medical_staff, $clinicMember));
-                return response()->json(['success' => true,'body' => $evenValue]);
+                $eventValue = event(new CreateMedicalStaffEvent($medical_staff, $clinicMember));
+                return response()->json(['success' => true,'body' => $eventValue]);
             }
         }
 

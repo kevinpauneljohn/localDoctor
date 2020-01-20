@@ -134,6 +134,6 @@ class CreateMedicalStaffListener
             ],
         ]);
 
-        return json_encode($response->getBody());
+        return json_decode($response->getBody());
     }
 }
