@@ -81,16 +81,20 @@ class CreateMedicalStaffListener
                 'address'   => $medicalStaff['address'],
                 'refprovince'     => $medicalStaff['refprovince'],
                 'refcitymun'    => $medicalStaff['refcitymun'],
-                'status'     => $medicalStaff['status'],
+                'status'     => "offline",
+                'category'     => "client",
                 'created_at' => date('Y-m-d h:i:s', strtotime($medicalStaff['created_at'])),
                 'updated_at' => date('Y-m-d h:i:s', strtotime($medicalStaff['updated_at'])),
+                'roles'     => $medicalStaff['roles'],
+                'clinic_id'     => $medicalStaff['clinic_id'],
+                'user_id'     => $medicalStaff['user_id'],
                 'terminal_id' => config('terminal.license'),
                 'action'    => 'created'
             ],
         ]);
 
         ///return 1;
-        return $medicalStaff;
+        return json_decode($response->getBody());
 //        return $medicalStaff['clinic_id'];
     }
 
@@ -130,6 +134,6 @@ class CreateMedicalStaffListener
             ],
         ]);
 
-        return json_decode($response->getBody());
+        return json_encode($response->getBody());
     }
 }
