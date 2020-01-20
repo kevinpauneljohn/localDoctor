@@ -90,7 +90,7 @@ class CreateMedicalStaffListener
         ]);
 
         ///return 1;
-        return json_decode($response->getBody());
+        return $medicalStaff;
 //        return $medicalStaff['clinic_id'];
     }
 
