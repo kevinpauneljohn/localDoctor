@@ -92,7 +92,8 @@ class CreateMedicalStaffListener
                     'clinic_id'     => $medicalStaff['clinic_id'],
                     'user_id'     => $medicalStaff['user_id'],
                     'terminal_id' => config('terminal.license'),
-                    'action'    => 'created'
+                    'action'    => 'created medical staff',
+                    'causer_id' => auth()->user()->id
                 ],
             ]);
 
