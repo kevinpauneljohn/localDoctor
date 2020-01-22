@@ -61,40 +61,53 @@ class CreateMedicalStaffListener
 //                    }
 //            }
 //        }
-
         $medicalStaff = $obj->merge($event->clinics);
-        $client = new Client([
-            'headers' => [
-                'content-type' => 'application/json',
-                'Accept' => 'application/json',
-                'Authorization' => 'Bearer '.auth()->user()->api_token,
-            ],
-        ]);
+        //there is internet connection
+        if($sock = @fsockopen('doctorapp.devouterbox.com', 80))
+        {
 
-        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/create-medical-staff',[
-            'json' => [
-                'id'         => $medicalStaff['id'],
-                'firstname'       => $medicalStaff['firstname'],
-                'middlename'    => $medicalStaff['middlename'],
-                'lastname'      => $medicalStaff['lastname'],
-                'mobileNo'       => $medicalStaff['mobileNo'],
-                'address'   => $medicalStaff['address'],
-                'refprovince'     => $medicalStaff['refprovince'],
-                'refcitymun'    => $medicalStaff['refcitymun'],
-                'status'     => "offline",
-                'category'     => "client",
-                'created_at' => date('Y-m-d h:i:s', strtotime($medicalStaff['created_at'])),
-                'updated_at' => date('Y-m-d h:i:s', strtotime($medicalStaff['updated_at'])),
-                'roles'     => $medicalStaff['roles'],
-                'clinic_id'     => $medicalStaff['clinic_id'],
-                'user_id'     => $medicalStaff['user_id'],
-                'terminal_id' => config('terminal.license'),
-                'action'    => 'created'
-            ],
-        ]);
+            $client = new Client([
+                'headers' => [
+                    'content-type' => 'application/json',
+                    'Accept' => 'application/json',
+                    'Authorization' => 'Bearer '.auth()->user()->api_token,
+                ],
+            ]);
+
+            $response = $client->request('POST','https://doctorapp.devouterbox.com/api/create-medical-staff',[
+                'json' => [
+                    'id'         => $medicalStaff['id'],
+                    'firstname'       => $medicalStaff['firstname'],
+                    'middlename'    => $medicalStaff['middlename'],
+                    'lastname'      => $medicalStaff['lastname'],
+                    'mobileNo'       => $medicalStaff['mobileNo'],
+                    'address'   => $medicalStaff['address'],
+                    'refprovince'     => $medicalStaff['refprovince'],
+                    'refcitymun'    => $medicalStaff['refcitymun'],
+                    'status'     => "offline",
+                    'category'     => "client",
+                    'created_at' => date('Y-m-d h:i:s', strtotime($medicalStaff['created_at'])),
+                    'updated_at' => date('Y-m-d h:i:s', strtotime($medicalStaff['updated_at'])),
+                    'roles'     => $medicalStaff['roles'],
+                    'clinic_id'     => $medicalStaff['clinic_id'],
+                    'user_id'     => $medicalStaff['user_id'],
+                    'terminal_id' => config('terminal.license'),
+                    'action'    => 'created'
+                ],
+            ]);
+
+            return json_decode($response->getBody());
+        }else{
+            $threshold = new Threshold();
+            $threshold->causer_id = auth()->user()->id;
+            $threshold->data = $medicalStaff;
+            $threshold->action = "created medical staff";
+            $threshold->save();
+            return 0;
+        }
+
 
         ///return 1;
-        return json_decode($response->getBody());
 //        return $medicalStaff['clinic_id'];
     }
 
