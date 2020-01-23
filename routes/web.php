@@ -60,6 +60,7 @@ Route::post('/medical-staffs','Staff\MedicalStaffController@store')->name('medic
 Route::put('/medical-staffs/{staff}','Staff\MedicalStaffController@update')->name('medicalStaffs.update')->middleware(['auth','permission:edit medical staff']);
 Route::delete('/medical-staffs/{staff}','Staff\MedicalStaffController@destroy')->name('medicalStaffs.destroy')->middleware(['auth','permission:delete medical staff']);
 Route::get('/medical-staffs-list','Staff\MedicalStaffController@medicalStaffList')->name('medicalStaffs.list')->middleware(['auth','permission:view medical staff']);
+Route::get('/sync-medical-staff','Staff\MedicalStaffController@syncServer')->name('sync.medicalStaff')->middleware(['auth','permission:add medical staff']);
 /*end medical staffs*/
 
 /*clinics*/

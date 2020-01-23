@@ -7,6 +7,7 @@ use App\ClinicUser;
 use App\Events\CreateMedicalStaffEvent;
 use App\Http\Controllers\Controller;
 use App\Role;
+use App\Threshold;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -282,5 +283,85 @@ class MedicalStaffController extends Controller
                 return '';
                 break;
         }
+    }
+
+    public function syncServer()
+    {
+        $thresholds = Threshold::where('table','medicalStaff');
+
+        //there'a a data saved in the threshold
+        if($thresholds->count() > 0)
+        {
+            if($sock = @fsockopen('doctorapp.devouterbox.com', 80))
+            {
+                foreach ($thresholds->get() as $threshold)
+                {
+                    $medicalStaff = json_decode($threshold->data);
+
+                    $body = $this->apiAuthorization(
+                        User::findOrFail($medicalStaff->user_id)->api_token,
+                        $medicalStaff->id,
+                        $medicalStaff->firstname,
+                        $medicalStaff->middlename,
+                        $medicalStaff->lastname,
+                        $medicalStaff->mobileNo,
+                        $medicalStaff->address,
+                        $medicalStaff->refprovince,
+                        $medicalStaff->refcitymun,
+                        $medicalStaff->created_at,
+                        $medicalStaff->updated_at,
+                        $medicalStaff->roles,
+                        $medicalStaff->clinic_id,
+                        $threshold->causer_id,
+                        $threshold->action
+                    );
+
+//                    if($body === 1)
+//                    {
+//                        $this->deleteThreshold($threshold);
+//                    }
+                }
+            }else{
+                //no internet connection or the server is not online
+                return response()->json(['message' => 'no internet connection']);
+            }
+        }
+    }
+
+    public function apiAuthorization($api_token, $id, $firstname, $middlename, $lastname, $mobileNo, $address, $refprovince, $refcitymun,
+                                     $created_at, $updated_at, $roles, $clinic_id, $user_id, $action)
+    {
+        $client = new Client([
+            'headers' => [
+                'content-type' => 'application/json',
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.$api_token,
+            ],
+        ]);
+
+        $response = $client->request('POST','https://doctorapp.devouterbox.com/api/create-medical-staff',[
+            'json' => [
+                'id'         => $id,
+                'firstname'       => $firstname,
+                'middlename'    => $middlename,
+                'lastname'      => $lastname,
+                'mobileNo'       => $mobileNo,
+                'address'   => $address,
+                'refprovince'     => $refprovince,
+                'refcitymun'    => $refcitymun,
+                'status'     => "offline",
+                'category'     => "client",
+                'created_at' => date('Y-m-d h:i:s', strtotime($created_at)),
+                'updated_at' => date('Y-m-d h:i:s', strtotime($updated_at)),
+                'roles'     => $roles,
+                'clinic_id'     => $clinic_id,
+                'user_id'     => $user_id,
+                'terminal_id' => config('terminal.license'),
+                'action'    => $action,
+                'causer_id' => auth()->user()->id
+            ],
+        ]);
+
+        return json_decode($response->getBody());
     }
 }

@@ -101,6 +101,7 @@ class CreateMedicalStaffListener
         }else{
             $threshold = new Threshold();
             $threshold->causer_id = auth()->user()->id;
+            $threshold->table = "medicalStaff";
             $threshold->data = $medicalStaff;
             $threshold->action = "created medical staff";
             $threshold->save();
