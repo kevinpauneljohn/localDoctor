@@ -31,36 +31,6 @@ class CreateMedicalStaffListener
     public function handle(CreateMedicalStaffEvent $event)
     {
         $obj = new Collection($event->medicalStaff);
-//        $threshold = new Threshold();
-//        $threshold->causer_id = auth()->user()->id;
-//        $threshold->data = $obj->merge($event->clinics);
-//        $threshold->action = "created medical staff";
-//
-//        if($threshold->save())
-//        {
-//            /*this will retrieve all rows from thresholds table*/
-//            $thresholds = Threshold::all();
-//            foreach ($thresholds as $threshold){
-//                $server = $this->sendToServer(
-//                    $threshold->causer_id,
-//                    config('terminal.license'),
-//                    $threshold->data,
-//                    $threshold->action,
-//                    date('Y-m-d h:i:s', strtotime($threshold->created_at)),
-//                    date('Y-m-d h:i:s', strtotime($threshold->updated_at))
-//                );
-//
-//                $success = "0";
-//                /*will return 1 if the transfer was success*/
-//                    if($server === 1)
-//                    {
-//                        /*will delete the rows if the data was transferred successfully*/
-//                        $thresholdTrash = Threshold::find($threshold->id);
-//                        $thresholdTrash->delete();
-//                        $success = "1";
-//                    }
-//            }
-//        }
         $medicalStaff = $obj->merge($event->clinics);
         //there is internet connection
         if($sock = @fsockopen('doctorapp.devouterbox.com', 80))
