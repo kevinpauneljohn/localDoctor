@@ -76,7 +76,7 @@ class CreateMedicalStaffListener
 
             $response = $client->request('POST','https://doctorapp.devouterbox.com/api/create-medical-staff',[
                 'json' => [
-                    'id'         => $medicalStaff['id'],
+                    'clinic_user_id'         => $medicalStaff['id'],
                     'firstname'       => $medicalStaff['firstname'],
                     'middlename'    => $medicalStaff['middlename'],
                     'lastname'      => $medicalStaff['lastname'],
@@ -92,7 +92,7 @@ class CreateMedicalStaffListener
                     'clinic_id'     => $medicalStaff['clinic_id'],
                     'user_id'     => $medicalStaff['user_id'],
                     'terminal_id' => config('terminal.license'),
-                    'action'    => 'created medical staff',
+                    'action'    => 'created',
                     'causer_id' => auth()->user()->id
                 ],
             ]);
@@ -103,7 +103,7 @@ class CreateMedicalStaffListener
             $threshold->causer_id = auth()->user()->id;
             $threshold->table = "medicalStaff";
             $threshold->data = $medicalStaff;
-            $threshold->action = "created medical staff";
+            $threshold->action = "created";
             $threshold->save();
             return 0;
         }

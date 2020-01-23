@@ -297,9 +297,10 @@ class MedicalStaffController extends Controller
                 foreach ($thresholds->get() as $threshold)
                 {
                     $medicalStaff = json_decode($threshold->data);
+                    //return $medicalStaff->roles;
 
                     $body = $this->apiAuthorization(
-                        User::findOrFail($medicalStaff->user_id)->api_token,
+                        User::findOrFail($threshold->causer_id)->api_token,
                         $medicalStaff->id,
                         $medicalStaff->firstname,
                         $medicalStaff->middlename,
@@ -308,18 +309,21 @@ class MedicalStaffController extends Controller
                         $medicalStaff->address,
                         $medicalStaff->refprovince,
                         $medicalStaff->refcitymun,
+                        $medicalStaff->status,
+                        $medicalStaff->category,
                         $medicalStaff->created_at,
                         $medicalStaff->updated_at,
                         $medicalStaff->roles,
                         $medicalStaff->clinic_id,
-                        $threshold->causer_id,
-                        $threshold->action
+                        $medicalStaff->user_id,
+                        $threshold->action,
+                        $threshold->causer_id
                     );
 
-//                    if($body === 1)
-//                    {
-//                        $this->deleteThreshold($threshold);
-//                    }
+                    if($body === 1)
+                    {
+                        $this->deleteThreshold($threshold);
+                    }
                 }
             }else{
                 //no internet connection or the server is not online
@@ -329,7 +333,7 @@ class MedicalStaffController extends Controller
     }
 
     public function apiAuthorization($api_token, $id, $firstname, $middlename, $lastname, $mobileNo, $address, $refprovince, $refcitymun,
-                                     $created_at, $updated_at, $roles, $clinic_id, $user_id, $action)
+                                     $status, $category, $created_at, $updated_at, $roles, $clinic_id, $user_id, $action, $causer_id)
     {
         $client = new Client([
             'headers' => [
@@ -341,7 +345,7 @@ class MedicalStaffController extends Controller
 
         $response = $client->request('POST','https://doctorapp.devouterbox.com/api/create-medical-staff',[
             'json' => [
-                'id'         => $id,
+                'clinic_user_id'         => $id,
                 'firstname'       => $firstname,
                 'middlename'    => $middlename,
                 'lastname'      => $lastname,
@@ -349,8 +353,8 @@ class MedicalStaffController extends Controller
                 'address'   => $address,
                 'refprovince'     => $refprovince,
                 'refcitymun'    => $refcitymun,
-                'status'     => "offline",
-                'category'     => "client",
+                'status'     => $status,
+                'category'     => $category,
                 'created_at' => date('Y-m-d h:i:s', strtotime($created_at)),
                 'updated_at' => date('Y-m-d h:i:s', strtotime($updated_at)),
                 'roles'     => $roles,
@@ -358,10 +362,23 @@ class MedicalStaffController extends Controller
                 'user_id'     => $user_id,
                 'terminal_id' => config('terminal.license'),
                 'action'    => $action,
-                'causer_id' => auth()->user()->id
+                'causer_id' => $causer_id
             ],
         ]);
 
         return json_decode($response->getBody());
+    }
+
+    /**
+     * Jan. 17, 2020
+     * @author john kevin paunel
+     * Delete threshold from local DB
+     * @return int
+     * */
+    public function deleteThreshold($threshold)
+    {
+        $threshold = Threshold::find($threshold->id);
+        $threshold->delete();
+        return 1;
     }
 }

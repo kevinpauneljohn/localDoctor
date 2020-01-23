@@ -5,7 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Staff/MedicalStaffController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Staff/MedicalStaffController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Listeners/CreateMedicalStaffListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/CreateMedicalStaffListener.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/threshold.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/threshold.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,13 +34,13 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.29588276">
+    <splitter split-orientation="horizontal" split-proportion="0.39078856">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/routes/web.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="199">
+                <state relative-caret-position="901">
                   <caret line="62" column="73" selection-start-line="62" selection-start-column="73" selection-end-line="62" selection-end-column="73" />
                 </state>
               </provider>
@@ -49,8 +49,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClinicController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-543">
-                  <caret line="246" column="41" lean-forward="true" selection-start-line="246" selection-start-column="41" selection-end-line="246" selection-end-column="41" />
+                <state relative-caret-position="5491">
+                  <caret line="334" column="4" selection-start-line="334" selection-start-column="4" selection-end-line="345" selection-end-column="5" />
                   <folding>
                     <element signature="e#40#55#0#PHP" expanded="true" />
                   </folding>
@@ -61,8 +61,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/Listeners/CreateMedicalStaffListener.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="80">
-                  <caret line="76" column="83" selection-start-line="76" selection-start-column="83" selection-end-line="76" selection-end-column="107" />
+                <state relative-caret-position="219">
+                  <caret line="90" column="37" selection-start-line="90" selection-start-column="37" selection-end-line="90" selection-end-column="37" />
                   <folding>
                     <element signature="e#33#72#0#PHP" expanded="true" />
                   </folding>
@@ -73,7 +73,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/Events/CreateMedicalStaffEvent.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="335">
+                <state relative-caret-position="306">
                   <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
                   <folding>
                     <element signature="e#30#66#0#PHP" expanded="true" />
@@ -86,23 +86,11 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/public/js/threshold.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="85">
-                  <caret line="5" column="3" lean-forward="true" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/Listeners/ClinicCreatedlistener.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="17">
-                  <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="33" selection-end-column="9" />
-                  <folding>
-                    <element signature="e#33#51#0#PHP" expanded="true" />
-                  </folding>
+                <state relative-caret-position="136">
+                  <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
                 </state>
               </provider>
             </entry>
@@ -116,11 +104,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Staff/MedicalStaffController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="253">
-                  <caret line="308" column="51" lean-forward="true" selection-start-line="308" selection-start-column="51" selection-end-line="308" selection-end-column="51" />
+                <state relative-caret-position="5134">
+                  <caret line="313" column="46" selection-start-line="313" selection-start-column="46" selection-end-line="313" selection-end-column="46" />
                   <folding>
                     <element signature="e#46#61#0#PHP" expanded="true" />
                   </folding>
@@ -199,11 +187,11 @@
         <option value="$PROJECT_DIR$/app/Events/ClinicDeletedEvent.php" />
         <option value="$PROJECT_DIR$/app/Listeners/ClinicDeletedListener.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ClinicController.php" />
-        <option value="$PROJECT_DIR$/public/js/threshold.js" />
         <option value="$PROJECT_DIR$/public/js/medical_staff.js" />
-        <option value="$PROJECT_DIR$/app/Listeners/CreateMedicalStaffListener.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Staff/MedicalStaffController.php" />
+        <option value="$PROJECT_DIR$/app/Listeners/CreateMedicalStaffListener.php" />
+        <option value="$PROJECT_DIR$/public/js/threshold.js" />
       </list>
     </option>
   </component>
@@ -514,14 +502,8 @@
       <workItem from="1579511987346" duration="2647000" />
       <workItem from="1579530757129" duration="8493000" />
       <workItem from="1579706936489" duration="3855000" />
-      <workItem from="1579743075161" duration="5752000" />
-    </task>
-    <task id="LOCAL-00009" summary="medical staff">
-      <created>1577749538408</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1577749538408</updated>
+      <workItem from="1579743075161" duration="10185000" />
+      <workItem from="1579758342308" duration="421000" />
     </task>
     <task id="LOCAL-00010" summary="medical staff">
       <created>1577950310348</created>
@@ -859,11 +841,18 @@
       <option name="project" value="LOCAL" />
       <updated>1579712171742</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="medical staff">
+      <created>1579753384312</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1579753384312</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="265300000" />
+    <option name="totallyTimeSpent" value="270154000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -1220,13 +1209,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/medical_staff.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" selection-start-line="18" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Listeners/ClinicCreatedlistener.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1237,24 +1219,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/threshold.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="3" lean-forward="true" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
+        <state relative-caret-position="901">
           <caret line="62" column="73" selection-start-line="62" selection-start-column="73" selection-end-line="62" selection-end-column="73" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClinicController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-543">
-          <caret line="246" column="41" lean-forward="true" selection-start-line="246" selection-start-column="41" selection-end-line="246" selection-end-column="41" />
+        <state relative-caret-position="5491">
+          <caret line="334" column="4" selection-start-line="334" selection-start-column="4" selection-end-line="345" selection-end-column="5" />
           <folding>
             <element signature="e#40#55#0#PHP" expanded="true" />
           </folding>
@@ -1263,7 +1238,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Events/CreateMedicalStaffEvent.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
+        <state relative-caret-position="306">
           <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
           <folding>
             <element signature="e#30#66#0#PHP" expanded="true" />
@@ -1273,18 +1248,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Listeners/CreateMedicalStaffListener.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="76" column="83" selection-start-line="76" selection-start-column="83" selection-end-line="76" selection-end-column="107" />
+        <state relative-caret-position="219">
+          <caret line="90" column="37" selection-start-line="90" selection-start-column="37" selection-end-line="90" selection-end-column="37" />
           <folding>
             <element signature="e#33#72#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/threshold.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/medical_staff.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" selection-start-line="18" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Staff/MedicalStaffController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="308" column="51" lean-forward="true" selection-start-line="308" selection-start-column="51" selection-end-line="308" selection-end-column="51" />
+        <state relative-caret-position="5134">
+          <caret line="313" column="46" selection-start-line="313" selection-start-column="46" selection-end-line="313" selection-end-column="46" />
           <folding>
             <element signature="e#46#61#0#PHP" expanded="true" />
           </folding>
