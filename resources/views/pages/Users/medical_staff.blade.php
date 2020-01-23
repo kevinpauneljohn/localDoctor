@@ -141,20 +141,73 @@
             <form role="form" id="edit-medical-staff-form" action="{{route('roles.update',['role' => 1])}}">
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="id" id="id">
+                <input type="hidden" name="staffId" id="staffId">
 {{--                <input type="hidden" name="url" id="url" value="roles">--}}
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Edit Role</h4>
+                            <h4 class="modal-title">Edit Medical Staff</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="form-group editRole">
-                                <label for="editRole">Role Name</label><span class="required">*</span>
-                                <input type="text" name="editRole" class="form-control" id="editRole">
+                            <div class="form-group edit_clinic">
+                                <label for="edit_clinic">Clinics</label><span class="required">*</span>
+                                <select class="form-control" name="edit_clinic" id="edit_clinic" style="width:100%;">
+                                    <option value=""> -- Select Clinic --</option>
+                                    @foreach($clinics as $clinic)
+                                        <option value="{{$clinic->id}}">{{$clinic->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group edit_position">
+                                <label for="edit_position">Position</label><span class="required">*</span>
+                                <select class="form-control select2" name="edit_position[]" id="edit_position" multiple="multiple" style="width:100%;">
+                                    <option value=""> -- Select Position --</option>
+                                    @foreach($positions as $position)
+                                        <option value="{{$position->name}}">{{$position->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group edit_firstname">
+                                <label for="edit_firstname">First Name</label><span class="required">*</span>
+                                <input type="text" name="edit_firstname" class="form-control" id="edit_firstname">
+                            </div>
+                            <div class="form-group edit_middlename">
+                                <label for="edit_middlename">Middle Name</label>
+                                <input type="text" name="edit_middlename" class="form-control" id="edit_middlename">
+                            </div>
+                            <div class="form-group edit_lastname">
+                                <label for="edit_lastname">Last Name</label><span class="required">*</span>
+                                <input type="text" name="edit_lastname" class="form-control" id="edit_lastname">
+                            </div>
+                            <div class="form-group edit_mobileNo">
+                                <label for="edit_mobileNo">Mobile No.</label><span class="required">*</span>
+                                <input type="text" name="edit_mobileNo" class="form-control" id="edit_mobileNo">
+                            </div>
+                            <div class="form-group edit_address">
+                                <label for="edit_address">Street/House/Bldg. Address</label><span class="required">*</span>
+                                <input type="text" name="edit_address" class="form-control" id="edit_address">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 edit_province">
+                                    <label for="edit_province">Province</label><span class="required">*</span>
+                                    <select class="form-control" name="edit_province" id="edit_province">
+                                        <option value="">-- Select Province</option>
+                                        @foreach($provinces as $province)
+                                            <option value="{{$province->provCode}}">{{$province->provDesc}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 edit_city">
+                                    <label for="edit_city">City</label><span class="required">*</span>
+                                    <select class="form-control" name="edit_city" id="edit_city">
+
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">

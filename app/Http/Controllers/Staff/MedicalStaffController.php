@@ -191,8 +191,13 @@ class MedicalStaffController extends Controller
     public function show($id)
     {
         $medicalStaff = User::find($id);
-
-        return response()->json([$medicalStaff, $medicalStaff->getRoleNames(),$medicalStaff->clinics]);
+        $cities = DB::table('refcitymun')->where('provCode',$medicalStaff->refprovince)->get();
+        return response()->json([
+            $medicalStaff,
+            $medicalStaff->getRoleNames(),
+            $medicalStaff->clinics,
+            $cities
+        ]);
 
     }
 

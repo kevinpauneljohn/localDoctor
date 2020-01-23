@@ -2,7 +2,7 @@ $(document).ready(function () {
     let x = 1;
     setInterval(function(){
         this.sendToServer('/sync-clinic',false);
-        setInterval(function(){
+        setTimeout(function(){
             this.sendToServer('/sync-medical-staff',false);
         },10000);
     },15000);

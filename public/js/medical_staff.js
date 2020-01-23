@@ -69,6 +69,7 @@ $(document).ready(function(){
 
 $(document).on('click','.edit-medical-staff',function(){
     let id = this.id;
+    let selected = "";
 
     //console.log(id);
 
@@ -78,7 +79,29 @@ $(document).on('click','.edit-medical-staff',function(){
         'cache' : false,
         success: function(result)
         {
-            console.log(result);
+            // $.each(result, function (key, value) {
+            //     console.log(value.roles[]);
+            //
+            // });
+            //console.log(result[0]['refcitymun']);
+
+            $('#edit_firstname').val(result[0]['firstname']);
+            $('#edit_middlename').val(result[0]['middlename']);
+            $('#edit_lastname').val(result[0]['lastname']);
+            $('#edit_mobileNo').val(result[0]['mobileNo']);
+            $('#edit_address').val(result[0]['address']);
+            $('#edit_province').val(result[0]['refprovince']);
+            $('#edit_city').append('<option value="">-- Select City --</option>');
+            $.each(result[3], function (key, value) {
+                console.log(value.citymunCode);
+                if(result[0]['refcitymun'] === value.citymunCode)
+                {
+                    selected = ' selected="selected"';
+                    console.log(selected);
+                }
+                $('#edit_city').append('<option value="'+value.citymunCode+'"'+selected+'>'+value.citymunDesc+'</option>');
+                //$('#edit_city').append('<option value="'+value.citymunCode+'">'+value.citymunDesc+'</option>');
+            });
         },error: function(xhr, status, error){
             console.log(xhr);
         }
