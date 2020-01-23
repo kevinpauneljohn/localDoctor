@@ -58,9 +58,9 @@ $(document).ready(function(){
             'POST',
             addForm.serialize() ,
             'New Medical Staff Successfully Created!',
-            false,
+            true,
             '',
-            true
+            false
         );
         clear_errors("clinic","position","firstname","lastname","mobileNo","address","province","city");
     });

@@ -1,11 +1,9 @@
 $(document).ready(function () {
     let x = 1;
     setInterval(function(){
-        //this.sendToServer('/sync-clinic',false);
-        console.log(1);
+        this.sendToServer('/sync-clinic',false);
         setInterval(function(){
-            //this.sendToServer('/sync-medical-staff');
-            console.log(2);
+            this.sendToServer('/sync-medical-staff',false);
         },10000);
     },15000);
 });
