@@ -10,6 +10,7 @@ use App\Role;
 use App\Threshold;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
@@ -60,14 +61,14 @@ class MedicalStaffController extends Controller
                 $action = "";
                 if(auth()->user()->hasPermissionTo('view medical staff'))
                 {
-                    $action .= '<button class="btn btn-xs btn-success view-staff" id="'.$medicalStaff->id.'"><i class="fa fa-eye"></i> View</button>';
+                    $action .= '<button class="btn btn-xs btn-success view-medical-staff" id="'.$medicalStaff->id.'"><i class="fa fa-eye"></i> View</button>';
                 }
                 if(auth()->user()->hasPermissionTo('edit medical staff'))
                 {
-                    $action .= '<button class="btn btn-xs btn-primary edit-staff" id="'.$medicalStaff->id.'"><i class="fa fa-edit"></i> Edit</button>';
+                    $action .= '<button class="btn btn-xs btn-primary edit-medical-staff" id="'.$medicalStaff->id.'" data-toggle="modal" data-target="#edit-medical-staff-modal"><i class="fa fa-edit"></i> Edit</button>';
                 }
                 if(auth()->user()->hasPermissionTo('delete medical staff')) {
-                    $action .= '<button class="btn btn-xs btn-danger delete-staff" id="' . $medicalStaff->id . '"><i class="fa fa-trash"></i> Delete</a>';
+                    $action .= '<button class="btn btn-xs btn-danger delete-medical-staff" id="' . $medicalStaff->id . '" data-toggle="modal" data-target="#delete-medical-staff-modal"><i class="fa fa-trash"></i> Delete</a>';
                 }
 
                 return $action;
@@ -189,7 +190,10 @@ class MedicalStaffController extends Controller
      */
     public function show($id)
     {
-        //
+        $medicalStaff = User::find($id);
+
+        return response()->json([$medicalStaff, $medicalStaff->getRoleNames(),$medicalStaff->clinics]);
+
     }
 
     /**

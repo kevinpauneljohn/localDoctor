@@ -65,3 +65,22 @@ $(document).ready(function(){
         clear_errors("clinic","position","firstname","lastname","mobileNo","address","province","city");
     });
 });
+
+
+$(document).on('click','.edit-medical-staff',function(){
+    let id = this.id;
+
+    //console.log(id);
+
+    $.ajax({
+        'url'   : '/medical-staffs/'+id,
+        'type'  : 'GET',
+        'cache' : false,
+        success: function(result)
+        {
+            console.log(result);
+        },error: function(xhr, status, error){
+            console.log(xhr);
+        }
+    });
+});

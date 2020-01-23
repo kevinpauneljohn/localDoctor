@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth','permission:assign role to permission']],f
 /*medical staffs*/
 Route::get('/medical-staffs','Staff\MedicalStaffController@index')->name('medicalStaffs.index')->middleware(['auth','permission:view medical staff']);
 Route::post('/medical-staffs','Staff\MedicalStaffController@store')->name('medicalStaffs.store')->middleware(['auth','permission:add medical staff']);
+Route::get('/medical-staffs/{staff}','Staff\MedicalStaffController@show')->name('medicalStaffs.show')->middleware(['auth','permission:view medical staff']);
 Route::put('/medical-staffs/{staff}','Staff\MedicalStaffController@update')->name('medicalStaffs.update')->middleware(['auth','permission:edit medical staff']);
 Route::delete('/medical-staffs/{staff}','Staff\MedicalStaffController@destroy')->name('medicalStaffs.destroy')->middleware(['auth','permission:delete medical staff']);
 Route::get('/medical-staffs-list','Staff\MedicalStaffController@medicalStaffList')->name('medicalStaffs.list')->middleware(['auth','permission:view medical staff']);

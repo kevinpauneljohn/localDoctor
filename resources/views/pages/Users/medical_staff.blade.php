@@ -136,9 +136,9 @@
     @endcan
 
     @can('edit medical staff')
-        <!--edit roles modal-->
-        <div class="modal fade" id="edit-role-modal">
-            <form role="form" id="edit-role-form" action="{{route('roles.update',['role' => 1])}}">
+        <!--edit medical staff modal-->
+        <div class="modal fade" id="edit-medical-staff-modal">
+            <form role="form" id="edit-medical-staff-form" action="{{route('roles.update',['role' => 1])}}">
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" id="id">
